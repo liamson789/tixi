@@ -1,0 +1,15 @@
+asgiref==3.8.1
+Django==5.2.3
+django-allauth==65.13.1
+django-quill-editor==0.1.42
+djangorestframework==3.16.1
+djangorestframework_simplejwt==5.5.1
+pillow==11.3.0
+psycopg2-binary==2.9.11
+PyJWT==2.10.1
+sqlparse==0.5.3
+tzdata==2025.2
+celery==5.3.4
+redis==5.0.1
+requests==2.31.0
+python-decouple==3.8
