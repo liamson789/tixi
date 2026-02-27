@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% block title %}Mi Perfil - TixiPWA{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>Mi Perfil</h2>
+
+  <div class="row g-4 mt-1">
+    <div class="col-md-3 text-center">
+      {% if profile.avatar_url %}
+        <img src="{{ profile.avatar_url }}" alt="Avatar" class="img-fluid rounded-circle border" style="max-width: 140px;">
+      {% else %}
+        <div class="rounded-circle border d-inline-flex align-items-center justify-content-center" style="width: 140px; height: 140px; font-size: 48px;">
+          👤
+        </div>
+      {% endif %}
+    </div>
+    <div class="col-md-9">
+      <p><strong>Usuario:</strong> {{ request.user.username }}</p>
+      <p><strong>Email:</strong> {{ request.user.email|default:"N/A" }}</p>
+      <p><strong>Nombre completo:</strong> {{ profile.full_name|default:"N/A" }}</p>
+      <p><strong>Teléfono de contacto:</strong> {{ profile.contact_phone|default:"N/A" }}</p>
+      <p><strong>Proveedor de autenticación:</strong> {{ profile.auth_provider }}</p>
+      <p><strong>Miembro desde:</strong> {{ request.user.date_joined|date:"Y-m-d H:i" }}</p>
+      <p><strong>Última actualización perfil:</strong> {{ profile.updated_at|date:"Y-m-d H:i" }}</p>
+    </div>
+  </div>
+
+  <hr class="my-4">
+  <h4>Editar perfil</h4>
+
+  {% if is_google_profile %}
+    <div class="alert alert-info">
+      Tu perfil se sincroniza con Google. Nombre y foto se actualizan desde Google, pero puedes editar tu teléfono de contacto aquí.
+    </div>
+  {% endif %}
+
+  <form method="post" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-6">
+      <label class="form-label" for="id_full_name">Nombre completo</label>
+      {{ profile_form.full_name }}
+      {% for error in profile_form.full_name.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+    <div class="col-md-6">
+      <label class="form-label" for="id_avatar_url">URL de avatar</label>
+      {{ profile_form.avatar_url }}
+      {% for error in profile_form.avatar_url.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+    <div class="col-md-6">
+      <label class="form-label" for="id_contact_phone">Teléfono de contacto</label>
+      {{ profile_form.contact_phone }}
+      {% for error in profile_form.contact_phone.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">
+        Guardar cambios
+      </button>
+    </div>
+  </form>
+
+  <hr class="my-4">
+  <h4>Seguridad y cuenta</h4>
+  <div class="d-flex flex-wrap gap-2">
+    {% if account_links.manage_email %}
+      <a href="{{ account_links.manage_email }}" class="btn btn-outline-primary">Gestionar email</a>
+    {% endif %}
+
+    {% if account_links.change_password %}
+      <a href="{{ account_links.change_password }}" class="btn btn-outline-primary">Cambiar contraseña</a>
+    {% elif account_links.set_password %}
+      <a href="{{ account_links.set_password }}" class="btn btn-outline-primary">Definir contraseña</a>
+    {% endif %}
+
+    {% if account_links.logout %}
+      <a href="{{ account_links.logout }}" class="btn btn-outline-danger">Cerrar sesión</a>
+    {% endif %}
+  </div>
+
+  <div class="mt-4">
+    {% if request.user.is_staff %}
+      <a href="/dashboard/" class="btn btn-secondary">Volver al dashboard</a>
+    {% else %}
+      <a href="{% url 'home' %}" class="btn btn-secondary">Volver al inicio</a>
+    {% endif %}
+  </div>
+
+  <hr class="my-4">
+  <h4>Mis compras</h4>
+
+  {% if user_purchases %}
+    <div class="row row-cols-1 row-cols-md-2 g-3 mt-1">
+      {% for purchase in user_purchases %}
+        <div class="col">
+          <a href="/raffles/{{ purchase.raffle.id }}/" class="text-decoration-none text-reset d-block h-100">
+            <div class="card h-100 {% if purchase.has_user_numbers %}border-success{% endif %}">
+              {% if purchase.raffle_image_url %}
+                <img
+                  src="{{ purchase.raffle_image_url }}"
+                  alt="Imagen de la rifa {{ purchase.raffle.title }}"
+                  class="card-img-top"
+                  style="height: 180px; object-fit: cover;"
+                  loading="lazy"
+                >
+              {% endif %}
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <h5 class="card-title mb-0">{{ purchase.raffle.title }}</h5>
+                  <div class="d-flex gap-2">
+                    <span class="badge bg-success">Pagada</span>
+                    {% if purchase.is_winner %}
+                      <span class="badge bg-warning text-dark">🏆 Ganador</span>
+                    {% endif %}
+                  </div>
+                </div>
+                <p class="card-text mb-1"><strong>Referencia:</strong> {{ purchase.reference }}</p>
+                <p class="card-text mb-1"><strong>Monto:</strong> ${{ purchase.amount }}</p>
+                <p class="card-text mb-1"><strong>Números:</strong> {{ purchase.numbers_count }}</p>
+                {% if purchase.purchased_numbers %}
+                  <p class="card-text mb-1"><strong>Mis números:</strong> {{ purchase.purchased_numbers|join:", " }}</p>
+                {% endif %}
+                {% if purchase.is_winner %}
+                  <p class="card-text mb-1 text-success"><strong>Resultado:</strong> ¡Número ganador: {{ purchase.winner_number }}!</p>
+                {% endif %}
+                <p class="card-text mb-0"><strong>Fecha:</strong> {{ purchase.created_at|date:"Y-m-d H:i" }}</p>
+
+                <div class="mt-3">
+                  <div class="d-flex justify-content-between small mb-1">
+                    <span>Avance de la rifa</span>
+                    <span>{{ purchase.raffle_sold_percentage|floatformat:2 }}%</span>
+                  </div>
+                  <div class="progress" role="progressbar" aria-label="Avance de ventas" aria-valuenow="{{ purchase.raffle_sold_percentage|floatformat:0 }}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-success" style="width: {{ purchase.raffle_sold_percentage|floatformat:2 }}%;"></div>
+                  </div>
+                  <p class="card-text mb-0 mt-1 small text-muted">{{ purchase.raffle_sold_numbers }} de {{ purchase.raffle_total_numbers }} números vendidos</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-light border mt-3 mb-0">
+      Aún no tienes compras pagadas registradas.
+    </div>
+  {% endif %}
+
+  <div class="mt-4">
+    <h5>Resumen de números en los que participas</h5>
+    {% if participation_summary %}
+      <p class="mb-2"><strong>Total de números:</strong> {{ total_participating_numbers }}</p>
+      <ul class="list-group">
+        {% for item in participation_summary %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>{{ item.raffle.title }}</span>
+            <span class="badge bg-primary rounded-pill">{{ item.count }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <div class="alert alert-light border mb-0">Aún no participas con números comprados.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

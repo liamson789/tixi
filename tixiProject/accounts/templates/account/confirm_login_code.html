@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Confirmar código - TixiPWA{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-shell {
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .auth-card {
+    border: 0;
+    border-radius: 14px;
+  }
+
+  .auth-brand {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .auth-link-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="auth-shell py-3 py-md-4">
+  <div class="card auth-card shadow-sm">
+    <div class="card-body p-4 p-md-5">
+      <div class="auth-brand">
+        <h2 class="h3 mb-2">Código de verificación</h2>
+        {% if email %}
+          <p class="text-muted mb-4">Enviamos un código a <strong>{{ email }}</strong>. Ingresa el código para continuar.</p>
+        {% elif phone %}
+          <p class="text-muted mb-4">Enviamos un código a <strong>{{ phone }}</strong>. Ingresa el código para continuar.</p>
+        {% else %}
+          <p class="text-muted mb-4">Ingresa el código de verificación para continuar.</p>
+        {% endif %}
+      </div>
+
+      {% if verify_form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+          {% for error in verify_form.non_field_errors %}
+            <div>{{ error }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <form method="post" action="{% url 'account_confirm_login_code' %}" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="id_code" class="form-label">Código</label>
+          <input
+            type="text"
+            name="code"
+            id="id_code"
+            class="form-control{% if verify_form.code.errors %} is-invalid{% endif %}"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            required
+          >
+          {% for error in verify_form.code.errors %}
+            <div class="invalid-feedback d-block">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        {{ redirect_field }}
+
+        <button type="submit" class="btn btn-primary w-100">Confirmar</button>
+      </form>
+
+      <div class="auth-link-row mt-4">
+        {% if can_resend %}
+          <form method="post" action="{% url 'account_confirm_login_code' %}" class="m-0">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="resend">
+            {{ redirect_field }}
+            <button type="submit" class="btn btn-link p-0">Solicitar nuevo código</button>
+          </form>
+        {% else %}
+          <span></span>
+        {% endif %}
+
+        {% if cancel_url %}
+          <a href="{{ cancel_url }}">Cancelar</a>
+        {% else %}
+          <a href="{% url 'account_logout' %}">Cancelar</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

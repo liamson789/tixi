@@ -1,0 +1,66 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Historial de Sorteos{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Historial de Sorteos</h2>
+
+    {% if draw_details %}
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Rifa</th>
+                    <th>Número Ganador</th>
+                    <th>Usuario Comprador</th>
+                    <th>Email</th>
+                    <th>Referencia Compra</th>
+                    <th>Fecha Compra</th>
+                    <th>Fecha de Sorteo</th>
+                    <th>Semilla (Seed)</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in draw_details %}
+                <tr>
+                    <td>
+                        <strong>{{ item.draw.raffle.title }}</strong>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge bg-success" style="font-size: 16px;">
+                            {{ item.draw.winner_number }}
+                        </span>
+                    </td>
+                    <td>{{ item.buyer_name }}</td>
+                    <td>{{ item.buyer_email }}</td>
+                    <td>{{ item.purchase_reference }}</td>
+                    <td>
+                        {% if item.purchase_date %}
+                            {{ item.purchase_date|date:'d/m/Y H:i' }}
+                        {% else %}
+                            No disponible
+                        {% endif %}
+                    </td>
+                    <td>{{ item.draw.executed_at|date:'d/m/Y H:i' }}</td>
+                    <td><code>{{ item.draw.seed }}</code></td>
+                    <td>
+                        <a href="{% url 'raffle_detail' item.draw.raffle.id %}" class="btn btn-sm btn-primary">
+                            Ver rifa
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">
+            <p>No hay sorteos registrados aún.</p>
+        </div>
+    {% endif %}
+
+    <a href="{% url 'dashboard:home' %}" class="btn btn-secondary mt-3">Volver al Dashboard</a>
+</div>
+{% endblock %}
+
+

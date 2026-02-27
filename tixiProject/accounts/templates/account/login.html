@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load socialaccount static %}
+
+{% block title %}Iniciar sesión - TixiPWA{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-shell {
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .auth-card {
+    border: 0;
+    border-radius: 14px;
+  }
+
+  .auth-brand {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .auth-logo {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+    margin-bottom: 0.75rem;
+  }
+
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--bs-secondary-color);
+    font-size: 0.9rem;
+  }
+
+  .auth-divider::before,
+  .auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--bs-border-color);
+  }
+  
+  .auth-link-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="auth-shell py-3 py-md-4">
+  <div class="card auth-card shadow-sm">
+    <div class="card-body p-4 p-md-5">
+      <div class="auth-brand">
+        <img src="{% static 'accounts/auth-logo.jpeg' %}" alt="Logo TixiPWA" class="auth-logo">
+        <h2 class="h3 mb-2">Iniciar sesión</h2>
+        <p class="text-muted mb-4">Accede con tu correo y contraseña o continúa con Google.</p>
+      </div>
+
+      {% if redirect_field_value %}
+        <a href="{% provider_login_url 'google' process='login' next=redirect_field_value %}" class="btn btn-outline-dark w-100 mb-3">
+          <span aria-hidden="true">🟢</span> Continuar con Google
+        </a>
+      {% else %}
+        <a href="{% provider_login_url 'google' process='login' %}" class="btn btn-outline-dark w-100 mb-3">
+          <span aria-hidden="true">🟢</span> Continuar con Google
+        </a>
+      {% endif %}
+
+      <div class="auth-divider mb-3">o usa tu cuenta</div>
+
+      <form method="post" action="{% url 'account_login' %}" novalidate>
+        {% csrf_token %}
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+        {% endif %}
+
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+              <div>{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="mb-3">
+          <label for="id_login" class="form-label">Correo o usuario</label>
+          <input
+            type="text"
+            name="login"
+            id="id_login"
+            class="form-control{% if form.login.errors %} is-invalid{% endif %}"
+            value="{{ form.login.value|default:'' }}"
+            autocomplete="username"
+            required
+          >
+          {% for error in form.login.errors %}
+            <div class="invalid-feedback d-block">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="mb-3">
+          <label for="id_password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            id="id_password"
+            class="form-control{% if form.password.errors %} is-invalid{% endif %}"
+            autocomplete="current-password"
+            required
+          >
+          {% for error in form.password.errors %}
+            <div class="invalid-feedback d-block">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        {% if form.remember %}
+          <div class="form-check mb-4">
+            {{ form.remember }}
+            <label class="form-check-label" for="id_remember">Recordarme</label>
+          </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+      </form>
+
+      <div class="auth-link-row mt-4">
+        <a href="{% url 'account_reset_password' %}">¿Olvidaste tu contraseña?</a>
+        {% if redirect_field_value %}
+          <a href="{% url 'account_signup' %}?next={{ redirect_field_value|urlencode }}">Crear cuenta</a>
+        {% else %}
+          <a href="{% url 'account_signup' %}">Crear cuenta</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

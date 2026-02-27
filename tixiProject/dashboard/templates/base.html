@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tixi | Plataforma de oportunidades digitales
+{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-dark: #0F172A;
+            --brand-primary: #22C55E;
+            --brand-primary-hover: #16A34A;
+            --brand-surface: #ffffff;
+            --brand-bg: #FFFFFF;
+            --brand-border: #F3F4F6;
+            --brand-text: #0F172A;
+            --brand-muted: #6b7280;
+            --brand-success: #22C55E;
+            --brand-warning: #EF4444;
+            --brand-danger: #ef4444;
+            --brand-info: #0F172A;
+            --brand-label: #0F172A;
+            --brand-progress: #22C55E;
+            --bs-primary: #22C55E;
+            --bs-success: #22C55E;
+            --bs-warning: #EF4444;
+            --bs-danger: #ef4444;
+            --bs-info: #0F172A;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            color: var(--brand-text);
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 400;
+            line-height: 1.55;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+        
+        .navbar {
+            background-color: var(--brand-dark);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: var(--brand-primary) !important;
+        }
+
+        .btn {
+            background-color: var(--brand-primary);
+            border-color: var(--brand-primary);
+            color: var(--brand-surface);
+            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.22);
+            transition: all 0.2s ease;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .btn:hover,
+        .btn:focus,
+        .btn:active {
+            background-color: var(--brand-primary-hover);
+            border-color: var(--brand-primary-hover);
+            color: var(--brand-surface);
+            box-shadow: 0 6px 14px rgba(22, 163, 74, 0.28);
+            transform: translateY(-1px);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: calc(100% - 70px);
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Sora', 'Inter', sans-serif;
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            height: 32px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .brand-title,
+        .brand-separator,
+        .brand-slogan {
+            white-space: nowrap;
+        }
+
+        .brand-title {
+            letter-spacing: 0.04em;
+        }
+
+        .logo-main {
+            color: #FFFFFF;
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .logo-x {
+            color: #22C55E;
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .brand-separator {
+            color: #FFFFFF;
+        }
+
+        .brand-slogan {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .navbar-toggler {
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-brand {
+                font-size: 1rem;
+                max-width: calc(100% - 60px);
+            }
+
+            .navbar-brand img {
+                width: 34px;
+                height: 28px;
+            }
+
+            .brand-slogan,
+            .brand-separator {
+                display: none;
+            }
+
+            .navbar-collapse {
+                margin-top: 10px;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 375px) {
+            body {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+                line-height: 1.2;
+            }
+
+            h2 {
+                font-size: 1.35rem;
+                line-height: 1.25;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                font-size: 0.92rem;
+                padding: 0.5rem 0.8rem;
+            }
+
+            .navbar-brand {
+                font-size: 0.92rem;
+            }
+        }
+        
+        .container {
+            background-color: transparent;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: none;
+        }
+
+        .card {
+            border: 1px solid #F3F4F6;
+            box-shadow: 0 6px 14px rgba(17, 24, 39, 0.08);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-group .btn {
+            margin-bottom: 10px;
+        }
+        
+        h1, h2, h3 {
+            color: var(--brand-text);
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+            font-family: 'Sora', 'Inter', sans-serif;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 3.6vw, 2.6rem);
+            font-weight: 600;
+            line-height: 1.15;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 2.7vw, 2rem);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 2.1vw, 1.5rem);
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .subtitle,
+        .card-subtitle,
+        .section-subtitle {
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .text-keyword-gold {
+            color: #FBBF24 !important;
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .text-important {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+        
+        .alert {
+            border-radius: 8px;
+        }
+        
+        table {
+            margin-top: 20px;
+        }
+        
+        .badge {
+            padding: 8px 12px;
+            background-color: #0F172A !important;
+            color: #ffffff !important;
+        }
+
+        .form-label {
+            color: var(--brand-label) !important;
+        }
+
+        .progress-bar {
+            background-color: var(--brand-progress) !important;
+            color: var(--brand-label);
+        }
+
+        .text-muted {
+            color: var(--brand-muted) !important;
+            font-weight: 400;
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <!-- Bootstrap 5 CSS <img src="{% static 'dashboard/logo.png' %}" alt="tixi"> --> 
+                <span class="brand-title"><span class="logo-main">TI</span><span class="logo-x">X</span><span class="logo-main">I</span></span>
+                <span class="brand-separator"></span>
+                <span class="brand-slogan"></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'winners' %}">Ganadores</a>
+                    </li>
+                    {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard:raffle_create' %}">+ Nueva Rifa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard:draw_history' %}">Historial de Sorteos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard:home' %}">Dashboard</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_profile' %}">Mi Perfil</a>
+                    </li>
+                    {% if request.user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/">Admin</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% if messages %}
+            <div class="container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5 py-4 border-top">
+        <div class="container">
+            <p class="text-muted">© 2026 TixiPWA - Panel de Administración de Rifas</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

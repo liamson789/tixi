@@ -1,0 +1,103 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}{% if is_edit %}Editar{% else %}Crear{% endif %} Lista - {{ raffle.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="mb-2">
+                {% if is_edit %}✏️ Editar Lista{% else %}📋 Nueva Lista{% endif %}
+            </h1>
+            <p class="text-muted">Rifa: <strong>{{ raffle.title }}</strong></p>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <a href="{% url 'dashboard:raffle_detail' raffle.id %}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Volver
+            </a>
+        </div>
+    </div>
+
+    <form method="POST" class="needs-validation" novalidate>
+        {% csrf_token %}
+
+        <!-- Información de la lista -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary bg-gradient text-white">
+                <h5 class="mb-0"><i class="bi bi-pencil"></i> {% if is_edit %}Editar Lista{% else %}Nueva Lista{% endif %}</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre de la Lista <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="name" name="name" 
+                           placeholder="Ej: Lista A, Números 1-100"
+                           value="{{ list.name|default:'' }}"
+                           required>
+                    <small class="text-muted d-block mt-2">Identificador único para esta lista</small>
+                </div>
+
+                {% if not is_edit %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="start" class="form-label">Número Inicial <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="start" name="start" 
+                                   placeholder="1" min="0" required>
+                            <small class="text-muted d-block mt-2">Primer número</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="end" class="form-label">Número Final <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="end" name="end" 
+                                   placeholder="100" min="0" required>
+                            <small class="text-muted d-block mt-2">Último número</small>
+                        </div>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> Se crearán números secuenciales.
+                        <span id="numbersCount" class="d-block mt-2"></span>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> 
+                        Rango: <strong>{{ list.start_number }} - {{ list.end_number }}</strong><br>
+                        Total: <strong>{{ list.numbers.all.count }} números</strong>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex gap-2 mb-4">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="bi bi-check-circle"></i> {% if is_edit %}Guardar cambios{% else %}Crear Lista{% endif %}
+            </button>
+            <a href="{% url 'dashboard:raffle_detail' raffle.id %}" class="btn btn-outline-secondary btn-lg">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .card { border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+</style>
+
+<script>
+    const startInput = document.getElementById('start');
+    const endInput = document.getElementById('end');
+
+    function updateNumbersCount() {
+        if (!startInput || !endInput) return;
+        const start = parseInt(startInput.value) || 0;
+        const end = parseInt(endInput.value) || 0;
+        if (end >= start && start >= 0) {
+            const count = end - start + 1;
+            document.getElementById('numbersCount').innerHTML = `<strong style="color: #22C55E;">Total: ${count.toLocaleString()} números</strong>`;
+        }
+    }
+
+    if (startInput) startInput.addEventListener('change', updateNumbersCount);
+    if (startInput) startInput.addEventListener('input', updateNumbersCount);
+    if (endInput) endInput.addEventListener('change', updateNumbersCount);
+    if (endInput) endInput.addEventListener('input', updateNumbersCount);
+</script>
+{% endblock %}

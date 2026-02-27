@@ -1,0 +1,99 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Perfil del Ganador{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-person-badge"></i> Perfil del Ganador</h5>
+                    <a href="javascript:history.back()" class="btn btn-outline-light btn-sm">Volver</a>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-3 text-center">
+                            {% if winner_profile.avatar_url %}
+                                <img
+                                    src="{{ winner_profile.avatar_url }}"
+                                    alt="Foto de perfil de {{ winner_user.username }}"
+                                    class="img-fluid rounded-circle border"
+                                    style="width: 130px; height: 130px; object-fit: cover;"
+                                >
+                            {% else %}
+                                <div class="rounded-circle border d-inline-flex align-items-center justify-content-center bg-light"
+                                     style="width: 130px; height: 130px; font-size: 42px;">
+                                    👤
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-9">
+                            <p class="mb-2"><strong>Usuario:</strong> {{ winner_user.username }}</p>
+                            <p class="mb-2"><strong>Nombre completo:</strong> {{ winner_profile.full_name|default:winner_user.username }}</p>
+                            <p class="mb-2"><strong>Email de contacto:</strong> {{ winner_user.email|default:'No disponible' }}</p>
+                            <p class="mb-2"><strong>Teléfono de contacto:</strong> {{ winner_profile.contact_phone|default:'No disponible' }}</p>
+                            <p class="mb-2"><strong>Proveedor de autenticación:</strong> {{ winner_profile.auth_provider }}</p>
+                            <p class="mb-0"><strong>Miembro desde:</strong> {{ winner_user.date_joined|date:"d/m/Y H:i" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0"><i class="bi bi-clock-history"></i> Historial de Participación en Rifas</h6>
+                </div>
+                <div class="card-body">
+                    {% if participation_history %}
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Rifa</th>
+                                        <th>Mis números</th>
+                                        <th>Número ganador</th>
+                                        <th>Resultado</th>
+                                        <th>Compras</th>
+                                        <th>Total invertido</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in participation_history %}
+                                        <tr>
+                                            <td>
+                                                <div class="fw-semibold">{{ item.raffle.title }}</div>
+                                                <small class="text-muted">Última compra: {{ item.last_purchase_at|date:"d/m/Y H:i" }}</small>
+                                            </td>
+                                            <td>
+                                                <div>{{ item.numbers|join:", " }}</div>
+                                                <small class="text-muted">{{ item.numbers_count }} número(s)</small>
+                                            </td>
+                                            <td>
+                                                {% if item.winner_number %}
+                                                    <span class="fw-semibold">{{ item.winner_number }}</span>
+                                                {% else %}
+                                                    <span class="text-muted">Pendiente</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <span class="badge {{ item.result_badge }}">{{ item.result_label }}</span>
+                                            </td>
+                                            <td>{{ item.purchase_count }}</td>
+                                            <td>${{ item.total_spent }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-light border mb-0">
+                            Este usuario aún no tiene compras pagadas en rifas.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

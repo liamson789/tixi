@@ -1,0 +1,349 @@
+{% extends "raffles/base.html" %}
+
+{% block title %}Rifas Disponibles{% endblock %}
+
+{% block extra_css %}
+<style>
+  .home-header {
+    gap: 0.75rem;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .status-filter-wrap {
+    max-width: 280px;
+  }
+
+  .raffles-scroll-container {
+    max-height: 72vh;
+    overflow: auto;
+    border: 0;
+    border-radius: 12px;
+    padding: 1rem;
+    background: transparent;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+  }
+
+  .raffles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+
+  .raffle-card-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .raffle-card-link:focus-visible {
+    outline: 2px solid #22C55E;
+    outline-offset: 3px;
+  }
+
+  .raffles-scroll-container::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .raffles-scroll-container::-webkit-scrollbar-thumb {
+    background: #6B7280;
+    border-radius: 20px;
+  }
+
+  .raffle-cover {
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .hero-carousel {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background: #fff;
+  }
+
+  .hero-carousel .carousel-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .hero-carousel .carousel-caption {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.1));
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem 1.25rem;
+    text-align: left;
+  }
+
+  .hero-carousel .carousel-caption h5 {
+    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
+  }
+
+  .hero-carousel .carousel-caption p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 991.98px) {
+    .raffles-scroll-container {
+      height: auto;
+      max-height: none;
+      overflow: auto;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x pan-y;
+      scrollbar-width: none;
+    }
+
+    .raffles-scroll-container::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    .raffles-grid {
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .home-header {
+      flex-direction: column;
+      align-items: stretch !important;
+    }
+
+    .header-actions {
+      width: 100%;
+    }
+
+    .header-actions .btn {
+      width: 100%;
+    }
+
+    .status-filter-wrap {
+      max-width: none;
+      width: 100%;
+    }
+
+    .status-filter-wrap .form-select {
+      width: 100%;
+    }
+
+    .raffles-scroll-container {
+      height: auto;
+      max-height: none;
+      overflow: auto;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      padding: 0;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x pan-y;
+      scrollbar-width: none;
+    }
+
+    .raffles-scroll-container::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    .raffles-grid {
+      grid-template-columns: minmax(260px, 1fr);
+      gap: 0.9rem;
+    }
+
+    .raffle-cover {
+      height: 180px;
+    }
+
+    .hero-carousel .carousel-item img {
+      height: 190px;
+    }
+
+    .hero-carousel .carousel-caption {
+      padding: 0.75rem 0.9rem;
+    }
+
+    .hero-carousel .carousel-caption h5 {
+      font-size: 0.95rem;
+    }
+
+    .hero-carousel .carousel-caption p {
+      font-size: 0.8rem;
+    }
+
+    .card-title {
+      font-size: 1rem;
+    }
+
+    .pagination {
+      flex-wrap: wrap;
+      row-gap: 0.5rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4 px-lg-5 mt-4 mb-5">
+  {% if carousel_items %}
+    <div id="featuredRafflesCarousel" class="carousel slide hero-carousel mb-4" data-bs-ride="carousel" data-bs-interval="4500">
+      <div class="carousel-indicators">
+        {% for item in carousel_items %}
+          <button type="button" data-bs-target="#featuredRafflesCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
+      </div>
+      <div class="carousel-inner">
+        {% for item in carousel_items %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <a href="{{ item.target_url }}" aria-label="Ver {{ item.title }}">
+              <img src="{{ item.image_url }}" alt="{{ item.title }}">
+              <div class="carousel-caption d-block">
+                <h5>{{ item.title }}</h5>
+                {% if item.subtitle %}
+                  <p>{{ item.subtitle }}</p>
+                {% endif %}
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#featuredRafflesCarousel" data-bs-slide="prev" aria-label="Anterior">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#featuredRafflesCarousel" data-bs-slide="next" aria-label="Siguiente">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  {% endif %}
+
+  <div class="d-flex justify-content-between align-items-center mb-4 home-header">
+    <div>
+      <h1 class="mb-1">🎟️ Rifas Disponibles</h1>
+      <p class="text-muted mb-0">Explora todas las rifas activas e históricas</p>
+    </div>
+    <div class="header-actions">
+      {% if request.user.is_staff %}
+        <a href="{% url 'dashboard:home' %}" class="btn btn-outline-dark">Ir al dashboard</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <form method="get" class="row g-2 mb-3">
+    <div class="col-auto status-filter-wrap">
+      <select class="form-select" name="status" onchange="this.form.submit()">
+        <option value="active" {% if status_filter == 'active' %}selected{% endif %}>Solo activas</option>
+        <option value="all" {% if status_filter == 'all' %}selected{% endif %}>Todas</option>
+      </select>
+    </div>
+  </form>
+
+  {% if raffles %}
+    <div class="raffles-scroll-container mb-4">
+      <div class="raffles-grid">
+        {% for raffle in raffles %}
+          <a href="{% url 'raffle_detail' raffle.id %}" class="raffle-card-link" aria-label="Ver rifa {{ raffle.title }}">
+          <div class="card h-100 shadow-sm">
+            {% with cover=raffle.media.first %}
+              {% if cover and cover.media_type == 'image' %}
+                <img src="{{ cover.file.url }}" class="card-img-top raffle-cover" alt="{{ raffle.title }}">
+              {% endif %}
+            {% endwith %}
+
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="card-title mb-0">{{ raffle.title }}</h5>
+                <span class="badge {% if raffle.is_active %}bg-success{% else %}bg-secondary{% endif %}">
+                  {% if raffle.is_active %}Activa{% else %}Finalizada{% endif %}
+                </span>
+              </div>
+
+              <p class="card-text text-muted">{{ raffle.description|truncatewords:20 }}</p>
+
+              <ul class="list-unstyled small mb-3">
+                <li><strong>Precio por número:</strong> ${{ raffle.price_per_number }}</li>
+                <li><strong>Números vendidos:</strong> {{ raffle.sold_numbers }} / {{ raffle.total_numbers }}</li>
+                <li><strong>Fecha del sorteo:</strong> {{ raffle.draw_date|date:"d/m/Y H:i" }}</li>
+              </ul>
+
+              <div class="mb-3">
+                <div class="d-flex justify-content-between small mb-1">
+                  <span>Ventas</span>
+                  <span>{{ raffle.sales_percentage|floatformat:1 }}%</span>
+                </div>
+                <div class="progress" style="height: 10px;">
+                  <div
+                    class="progress-bar bg-success js-sales-bar"
+                    role="progressbar"
+                    data-sales="{{ raffle.sales_percentage }}"
+                    aria-valuenow="{{ raffle.sales_percentage }}"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+              </div>
+
+              <span class="btn btn-primary mt-auto">Ver rifa</span>
+            </div>
+          </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if page_obj.paginator.num_pages > 1 %}
+      <nav aria-label="Paginación de rifas">
+        <ul class="pagination justify-content-center mb-0">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}&status={{ status_filter }}">Anterior</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+          {% endif %}
+
+          <li class="page-item disabled">
+            <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+          </li>
+
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}&status={{ status_filter }}">Siguiente</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  {% else %}
+    <div class="alert alert-info mb-0">
+      Aún no hay rifas creadas.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.js-sales-bar').forEach((bar) => {
+      const value = Number(bar.dataset.sales || 0);
+      bar.style.width = `${Math.max(0, Math.min(100, value))}%`;
+    });
+  });
+</script>
+{% endblock %}

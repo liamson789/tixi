@@ -1,0 +1,432 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard - Tixi{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            --bs-primary: #22C55E;
+            --bs-success: #22C55E;
+            --bs-warning: #EF4444;
+            --bs-danger: #ef4444;
+            --bs-info: #0F172A;
+        }
+
+        body {
+            background: #FFFFFF;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 400;
+            line-height: 1.55;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+        
+        .navbar {
+            background: #0F172A;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 6px 16px rgba(17, 24, 39, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+
+        .navbar .container-fluid {
+            min-height: 72px;
+            gap: 10px;
+        }
+
+        .navbar .nav-link {
+            color: #F3F4F6;
+            font-weight: 500;
+            padding: 8px 12px !important;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: #22C55E !important;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Sora', 'Inter', sans-serif;
+            max-width: calc(100% - 70px);
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logo-main {
+            color: #FFFFFF;
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .logo-x {
+            color: #FBBF24;
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .brand-separator {
+            color: #FFFFFF;
+            opacity: 0.9;
+        }
+
+        .brand-panel-text {
+            color: #FFFFFF;
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .navbar-brand img {
+            width: 40px;
+            height: 34px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .navbar-brand-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 6px 10px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.2rem rgba(34, 197, 94, 0.25);
+        }
+
+        .dropdown-menu {
+            border: 1px solid #F3F4F6;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(17, 24, 39, 0.12);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar {
+                box-shadow: 0 4px 12px rgba(17, 24, 39, 0.18);
+            }
+
+            .navbar .container-fluid {
+                padding-left: 12px;
+                padding-right: 12px;
+                min-height: 64px;
+            }
+
+            .navbar-brand {
+                font-size: 1.05rem;
+                max-width: calc(100% - 60px);
+            }
+
+            .navbar-brand img {
+                width: 32px;
+                height: 28px;
+            }
+
+            .navbar-collapse {
+                margin-top: 10px;
+                background: #0F172A;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 12px;
+                padding: 10px;
+            }
+
+            .navbar-nav .nav-link {
+                padding: 12px !important;
+                border-radius: 10px;
+            }
+
+            .dropdown-menu {
+                background: transparent;
+                border: 0;
+                box-shadow: none;
+                padding-top: 0;
+            }
+
+            .dropdown-item {
+                color: #F3F4F6;
+                border-radius: 8px;
+                padding: 10px 12px;
+            }
+
+            .dropdown-item:hover,
+            .dropdown-item:focus {
+                color: #22C55E;
+                background-color: rgba(255, 255, 255, 0.06);
+            }
+
+            .dropdown-divider {
+                border-top-color: rgba(255, 255, 255, 0.18);
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .navbar-brand {
+                font-size: 0.98rem;
+            }
+
+            .navbar-brand img {
+                width: 28px;
+                height: 24px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            body {
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+                line-height: 1.2;
+            }
+
+            h2 {
+                font-size: 1.35rem;
+                line-height: 1.25;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                font-size: 0.92rem;
+                padding: 0.5rem 0.8rem;
+            }
+
+            .navbar-brand {
+                font-size: 0.9rem;
+            }
+
+            .navbar .container-fluid {
+                min-height: 58px;
+            }
+        }
+
+        .container {
+            background-color: transparent;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: none;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-group .btn {
+            margin-bottom: 10px;
+        }
+        
+        h1, h2, h3 {
+            color: #0F172A;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            font-family: 'Sora', 'Inter', sans-serif;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 3.2vw, 2.5rem);
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+
+        h2 {
+            font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: clamp(1.18rem, 1.9vw, 1.45rem);
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        .subtitle,
+        .card-subtitle,
+        .section-subtitle {
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .text-keyword-gold {
+            color: #FBBF24 !important;
+            font-family: 'Sora', 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .text-important {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+        }
+        
+        .alert {
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        table {
+            margin-top: 20px;
+        }
+        
+        .badge {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            background-color: #0F172A !important;
+            color: #ffffff !important;
+        }
+
+        .form-label {
+            color: #0F172A !important;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            background-color: #22C55E !important;
+            color: #0F172A;
+        }
+
+        .form-control, .form-select, .input-group-text {
+            border-radius: 6px;
+            border: 1px solid #F3F4F6;
+            transition: all 0.3s ease;
+        }
+
+
+        .form-control:focus, .form-select:focus {
+            border-color: #22C55E;
+            box-shadow: 0 0 0 0.2rem rgba(34, 197, 94, 0.25);
+        }
+
+        .btn {
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            letter-spacing: 0.01em;
+        }
+
+        .btn-primary {
+            background: #22C55E;
+            border: none;
+            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.22);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: #16A34A;
+            box-shadow: 0 6px 14px rgba(22, 163, 74, 0.28);
+        }
+
+        .card {
+            border: 1px solid #F3F4F6;
+            border-radius: 10px;
+            box-shadow: 0 6px 14px rgba(17, 24, 39, 0.08);
+        }
+
+        .card-header {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Navegación principal">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="{% url 'dashboard:home' %}">
+              <!-- Navbar    <img src="{% static 'dashboard/logo.png' %}" alt="Tixi"> -->
+                                <span class="navbar-brand-text">
+                                        <span class="logo-main">TI</span><span class="logo-x">X</span><span class="logo-main">I</span>
+                                        <span class="brand-separator mx-1">|</span>
+                                        <span class="brand-panel-text">Panel de Control</span>
+                                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard:home' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard:draw_history' %}">Historial</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person"></i> Perfil
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'dashboard:carousel_settings' %}">Configuración</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/accounts/logout/">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mensajes -->
+    <div class="container-fluid px-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class="bi bi-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Contenido Principal -->
+    {% block content %}{% endblock %}
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

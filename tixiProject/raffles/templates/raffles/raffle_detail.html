@@ -1,0 +1,640 @@
+{% extends "raffles/base.html" %}
+{% block extra_css %}
+{{ block.super }}
+<style>
+  .raffle-result-alert {
+    background-color: #0F172A;
+    border: 1px solid #0F172A;
+    color: #FFFFFF;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.25);
+  }
+
+  .raffle-result-alert p,
+  .raffle-result-alert h4,
+  .raffle-result-alert strong {
+    color: #FFFFFF;
+  }
+
+  .raffle-result-alert .winner-comment-box,
+  .raffle-result-alert .winner-comment-box p,
+  .raffle-result-alert .winner-comment-box strong {
+    color: #0F172A;
+  }
+
+  .raffle-result-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .trophy-gold {
+    color: #FBBF24;
+    font-size: 1.35rem;
+  }
+
+  .winner-number-label {
+    margin-bottom: 4px;
+  }
+
+  .winner-number-display {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #FBBF24;
+    margin-bottom: 10px;
+  }
+
+  .raffle-closed-alert {
+    background-color: #F3F4F6;
+    border: 1px solid #EF4444;
+    color: #0F172A;
+  }
+
+  .raffle-closed-alert h5,
+  .raffle-closed-alert p {
+    color: #0F172A;
+    margin-bottom: 0;
+  }
+
+  .winner-badge {
+    background-color: rgba(251, 191, 36, 0.12) !important;
+    color: #FBBF24 !important;
+    border: 1px solid rgba(251, 191, 36, 0.45);
+  }
+
+  .available {
+    background-color: #FFFFFF;
+    border: 1px solid #F3F4F6;
+    color: #0F172A;
+  }
+
+  .reserved {
+    background-color: #F3F4F6;
+    color: #6B7280;
+  }
+
+  .sold {
+    background-color: #EF4444;
+    color: #FFFFFF;
+  }
+
+  .mine {
+    background-color: #0F172A;
+    color: #ffffff;
+    border: 1px solid #0F172A;
+  }
+
+  .numbers-legend {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0 14px;
+  }
+
+  .legend-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid #F3F4F6;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0F172A;
+    background: #ffffff;
+  }
+
+  .legend-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+  }
+
+  .legend-swatch.available { background-color: #FFFFFF; border-color: #F3F4F6; }
+  .legend-swatch.reserved { background-color: #F3F4F6; border-color: #F3F4F6; }
+  .legend-swatch.sold { background-color: #EF4444; border-color: #EF4444; }
+  .legend-swatch.mine { background-color: #0F172A; border-color: #0F172A; }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="container mt-4 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xxl-11">
+
+      <h2>{{ raffle.title }}</h2>
+      <p>{{ raffle.description }}</p>
+
+      {% if raffle_images %}
+      <div class="row g-3 mb-3">
+        {% for media in raffle_images %}
+        <div class="col-12 col-sm-6 col-lg-4">
+          <img
+            src="{{ media.file.url }}"
+            alt="Imagen de la rifa {{ raffle.title }}"
+            class="img-fluid rounded border w-100"
+            style="height: 220px; object-fit: cover;"
+            loading="lazy"
+          >
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <p>Precio por número: <span class="text-important">${{ raffle.price_per_number }}</span></p>
+
+      <div class="mb-3" aria-label="Progreso de venta de números">
+        <div class="d-flex justify-content-between align-items-center mb-1 small">
+          <strong>Progreso de ventas</strong>
+          <span id="sales-progress-text">{{ sold_numbers_count }}/{{ total_numbers_count }} ({{ sold_percentage|floatformat:1 }}%)</span>
+        </div>
+        <div class="progress" role="progressbar" aria-label="Porcentaje vendido" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ sold_percentage|floatformat:0 }}">
+          <div
+            id="sales-progress-bar"
+            class="progress-bar bg-danger"
+            style="width: 0%"
+            data-initial-percentage="{{ sold_percentage|floatformat:1 }}"
+          ></div>
+        </div>
+      </div>
+
+{% if public_draw_detail %}
+<div class="alert raffle-result-alert">
+  <h4 class="raffle-result-title"><span class="trophy-gold">🏆</span>Resultado del Sorteo</h4>
+  <div class="d-flex align-items-center gap-3 mb-3">
+    {% if public_draw_detail.winner_avatar_url %}
+      <img
+        src="{{ public_draw_detail.winner_avatar_url }}"
+        alt="Foto de perfil de {{ public_draw_detail.winner_name }}"
+        class="rounded-circle border"
+        style="width: 56px; height: 56px; object-fit: cover;"
+        loading="lazy"
+      >
+    {% else %}
+      <div class="rounded-circle border d-flex align-items-center justify-content-center bg-light"
+           style="width: 56px; height: 56px;">
+        👤
+      </div>
+    {% endif %}
+    <div>
+      <p class="mb-1"><strong>Ganador:</strong> {{ public_draw_detail.winner_name }} <span class="badge winner-badge ms-2">🏆 Ganador</span></p>
+      <p class="mb-0"><strong>Comprador (alias):</strong> {{ public_draw_detail.buyer_alias }}</p>
+    </div>
+  </div>
+  <p class="winner-number-label"><strong>Número ganador:</strong></p>
+  <div class="winner-number-display">{{ public_draw_detail.winner_number }}</div>
+  <p><strong>Fecha y hora del sorteo:</strong> {{ public_draw_detail.executed_at|date:"d/m/Y H:i" }}</p>
+  {% if public_draw_detail.winner_comment %}
+    <div class="alert alert-light border mt-3 mb-0 winner-comment-box">
+      <p class="mb-1"><strong>Comentario del ganador:</strong></p>
+      <p class="mb-0">{{ public_draw_detail.winner_comment|linebreaksbr }}</p>
+    </div>
+  {% else %}
+    <div class="alert alert-light border mt-3 mb-0 winner-comment-box">
+      <p class="mb-1"><strong>Comentario del ganador:</strong></p>
+      {% if winner_comment_value and not winner_comment_enabled %}
+        <p class="mb-0 text-muted">El ganador ya dejó un comentario, pero está pendiente de activación por el administrador.</p>
+      {% else %}
+        <p class="mb-0 text-muted">El ganador aún no ha dejado su comentario.</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if can_comment_as_winner %}
+    <div class="card border mt-3 mb-0">
+      <div class="card-body">
+        <h5 class="card-title mb-3">Comentario del ganador</h5>
+        <form method="POST" action="{% url 'submit_winner_comment' raffle.id %}">
+          {% csrf_token %}
+          <label for="winner_comment" class="form-label">Confirma si recibiste el premio y deja tu comentario</label>
+          <textarea
+            id="winner_comment"
+            name="winner_comment"
+            class="form-control"
+            rows="3"
+            maxlength="800"
+            placeholder="Ejemplo: Sí, recibí el premio. Gracias por la transparencia del sorteo."
+          >{{ winner_comment_value }}</textarea>
+          <div class="form-text">Tu comentario solo será público cuando el administrador lo active.</div>
+          {% if winner_comment_enabled %}
+            <div class="text-success small mt-2">Actualmente tu comentario está visible en la sección de ganadores.</div>
+          {% else %}
+            <div class="text-muted small mt-2">Actualmente tu comentario no está visible públicamente.</div>
+          {% endif %}
+          <button type="submit" class="btn btn-primary btn-sm mt-3">Guardar comentario</button>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+
+  <a href="{% url 'home' %}" class="btn btn-primary btn-sm mt-2">Ver otras rifas</a>
+</div>
+{% endif %}
+
+<hr>
+
+{% if not can_participate %}
+<div class="alert raffle-closed-alert d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+  <div>
+    <h5 class="mb-1">Esta rifa ya finalizó</h5>
+    <p class="mb-0">Ya hay un ganador, por lo tanto no se permiten más compras en esta rifa.</p>
+  </div>
+  <a href="{% url 'home' %}" class="btn btn-primary">Participar en otras rifas</a>
+</div>
+{% endif %}
+
+<form id="reserve-form" method="POST" action="{% url 'api-reserve-numbers' %}">
+  {% csrf_token %}
+  <input type="hidden" name="raffle_id" value="{{ raffle.id }}">
+
+  <div class="numbers-legend" aria-label="Leyenda de colores">
+    <span class="legend-tag"><span class="legend-swatch available"></span>Disponible</span>
+    <span class="legend-tag"><span class="legend-swatch reserved"></span>Reservado</span>
+    <span class="legend-tag"><span class="legend-swatch sold"></span>Vendido</span>
+    <span class="legend-tag"><span class="legend-swatch mine"></span>Tu número</span>
+  </div>
+
+  <div id="reservation-countdown-container" class="small text-muted mb-2 d-none" aria-live="polite">
+    Tus reservas activas se liberan en <strong id="reservation-countdown">--:--</strong>
+  </div>
+
+  <div class="numbers-grid">
+    {% for number in numbers %}
+      <div
+        id="number-{{ number.number }}"
+        class="number-box
+          {% if number.is_mine %} mine
+          {% elif number.is_sold %} sold
+          {% elif number.is_reserved %} reserved
+          {% else %} available {% endif %}"
+      >
+        {% if can_participate and not number.is_sold and not number.is_reserved %}
+          <label>
+            <input type="checkbox" name="numbers[]" value="{{ number.number }}">
+            {{ number.number }}
+          </label>
+        {% else %}
+          {{ number.number }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  <br>
+  {% if can_participate %}
+  <div class="d-flex gap-2 flex-wrap">
+    <button type="submit" class="btn btn-outline-primary ">Reservar números</button>
+    <button type="button" id="clear-selection-btn" class="btn btn-outline-secondary">Limpiar selección</button>
+  </div>
+  <small id="clear-selection-feedback" class="text-primary d-none mt-2" aria-live="polite">Selección limpiada.</small>
+  {% else %}
+  <button type="button" class="btn btn-outline-secondary" disabled>No disponible</button>
+  {% endif %}
+</form>
+
+{% if request.user.is_authenticated %}
+  <div class="mt-4">
+    <h5>Resumen de números en los que participas</h5>
+    {% if my_numbers %}
+      <p class="mb-2"><strong>Total:</strong> {{ my_numbers_count }}</p>
+      <p class="mb-0"><strong>Mis números:</strong> {{ my_numbers|join:", " }}</p>
+    {% else %}
+      <div class="alert alert-light border mb-0">Aún no tienes números comprados en esta rifa.</div>
+    {% endif %}
+  </div>
+{% endif %}
+
+<script>
+const reserveForm = document.getElementById("reserve-form");
+const clearSelectionBtn = document.getElementById("clear-selection-btn");
+const clearSelectionFeedback = document.getElementById("clear-selection-feedback");
+const isAuthenticated = "{{ request.user.is_authenticated|yesno:'true,false' }}" === "true";
+const canParticipate = "{{ can_participate|yesno:'true,false' }}" === "true";
+const loginUrl = "{% url 'account_login' %}";
+const homeUrl = "{% url 'home' %}";
+const reservationCountdownContainer = document.getElementById("reservation-countdown-container");
+const reservationCountdownText = document.getElementById("reservation-countdown");
+let earliestReservationExpiry = null;
+
+function showNoticeModal({
+  title,
+  message,
+  actionLabel = "Ver otras rifas",
+  actionUrl = homeUrl,
+}) {
+  const existingModal = document.getElementById("reserveNoticeModal");
+  if (existingModal) {
+    existingModal.remove();
+  }
+
+  const modalWrapper = document.createElement("div");
+  modalWrapper.innerHTML = `
+    <div class="modal fade" id="reserveNoticeModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">${title}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-0">${message}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <a href="${actionUrl}" class="btn btn-primary">${actionLabel}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modalWrapper.firstElementChild);
+  const modalElement = document.getElementById("reserveNoticeModal");
+  const modal = new bootstrap.Modal(modalElement);
+  modal.show();
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
+function formatSeconds(totalSeconds) {
+  const safeSeconds = Math.max(0, totalSeconds);
+  const minutes = Math.floor(safeSeconds / 60);
+  const seconds = safeSeconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+function renderReservationCountdown() {
+  if (!reservationCountdownContainer || !reservationCountdownText || !earliestReservationExpiry) {
+    if (reservationCountdownContainer) {
+      reservationCountdownContainer.classList.add("d-none");
+    }
+    return;
+  }
+
+  const remainingSeconds = Math.ceil((earliestReservationExpiry - Date.now()) / 1000);
+
+  if (remainingSeconds <= 0) {
+    reservationCountdownContainer.classList.add("d-none");
+    earliestReservationExpiry = null;
+    return;
+  }
+
+  reservationCountdownText.textContent = formatSeconds(remainingSeconds);
+  reservationCountdownContainer.classList.remove("d-none");
+}
+
+function updateReservationCountdownFromData(items) {
+  if (!isAuthenticated) {
+    earliestReservationExpiry = null;
+    renderReservationCountdown();
+    return;
+  }
+
+  const reservedExpiries = items
+    .filter((item) => item.is_reserved_by_me && item.reserved_until)
+    .map((item) => new Date(item.reserved_until).getTime())
+    .filter((timeValue) => Number.isFinite(timeValue) && timeValue > Date.now());
+
+  earliestReservationExpiry = reservedExpiries.length ? Math.min(...reservedExpiries) : null;
+  renderReservationCountdown();
+}
+
+function ensureSelectableState(box, number, isSelectable) {
+  const existingLabel = box.querySelector("label");
+  const existingInput = box.querySelector('input[name="numbers[]"]');
+
+  if (!isSelectable) {
+    if (existingInput) {
+      existingInput.checked = false;
+      existingInput.disabled = true;
+      return;
+    }
+    box.textContent = String(number);
+    return;
+  }
+
+  if (existingInput) {
+    existingInput.disabled = false;
+    return;
+  }
+
+  box.textContent = "";
+  const label = document.createElement("label");
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.name = "numbers[]";
+  input.value = String(number);
+  input.disabled = false;
+  label.appendChild(input);
+  label.appendChild(document.createTextNode(` ${number}`));
+  box.appendChild(label);
+}
+
+function updateSalesProgress(items) {
+  const progressBar = document.getElementById("sales-progress-bar");
+  const progressText = document.getElementById("sales-progress-text");
+
+  if (!progressBar || !progressText || !Array.isArray(items) || !items.length) {
+    return;
+  }
+
+  const total = items.length;
+  const sold = items.filter((item) => item.is_sold).length;
+  const percentage = total ? (sold / total) * 100 : 0;
+  const roundedPercentage = Math.round(percentage * 10) / 10;
+
+  progressBar.style.width = `${roundedPercentage}%`;
+  progressBar.parentElement.setAttribute("aria-valuenow", String(Math.round(roundedPercentage)));
+  progressText.textContent = `${sold}/${total} (${roundedPercentage.toFixed(1)}%)`;
+}
+
+const progressBar = document.getElementById("sales-progress-bar");
+if (progressBar) {
+  const initialPercentage = Number(progressBar.dataset.initialPercentage || "0");
+  if (Number.isFinite(initialPercentage)) {
+    progressBar.style.width = `${initialPercentage}%`;
+  }
+}
+
+if (reserveForm) {
+  reserveForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!canParticipate) {
+      showNoticeModal({
+        title: "Rifa finalizada",
+        message: "Ya hay un ganador en esta rifa. Te invitamos a participar en otras rifas activas.",
+      });
+      return;
+    }
+
+    if (!isAuthenticated) {
+      const nextUrl = `${window.location.pathname}${window.location.search}`;
+      window.location.href = `${loginUrl}?next=${encodeURIComponent(nextUrl)}`;
+      return;
+    }
+
+    const raffleIdInput = reserveForm.querySelector('input[name="raffle_id"]');
+    const selected = Array.from(
+      reserveForm.querySelectorAll('input[name="numbers[]"]:checked')
+    ).map((item) => Number(item.value));
+
+    if (!raffleIdInput) {
+      showNoticeModal({
+        title: "No se pudo procesar",
+        message: "No se encontró el identificador de la rifa. Inténtalo de nuevo desde la lista de rifas.",
+      });
+      return;
+    }
+
+    if (!selected.length) {
+      showNoticeModal({
+        title: "Selecciona un número",
+        message: "Debes seleccionar al menos un número para continuar con la compra.",
+      });
+      return;
+    }
+
+    try {
+      const response = await fetch(reserveForm.action, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: JSON.stringify({
+          raffle_id: Number(raffleIdInput.value),
+          numbers: selected,
+        }),
+      });
+
+      const responseText = await response.text();
+      let data = {};
+      try {
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch (_) {
+        data = { detail: responseText || "Respuesta no JSON del servidor." };
+      }
+
+      if (!response.ok) {
+        const message = data.detail || data.error || `No se pudieron reservar los números (HTTP ${response.status}).`;
+        const isClosed = Boolean(data.raffle_closed);
+        showNoticeModal({
+          title: isClosed ? "Rifa finalizada" : "No se pudo reservar",
+          message,
+          actionLabel: isClosed ? "Ver otras rifas" : "Ir a rifas",
+          actionUrl: homeUrl,
+        });
+        return;
+      }
+
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+        return;
+      }
+
+      showNoticeModal({
+        title: "¡Reserva creada!",
+        message: "Tus números se reservaron correctamente.",
+        actionLabel: "Ver otras rifas",
+      });
+      window.location.reload();
+    } catch (error) {
+      showNoticeModal({
+        title: "Error de conexión",
+        message: `No fue posible reservar en este momento: ${error.message || error}`,
+      });
+    }
+  });
+}
+
+function updateNumbers() {
+  return fetch("{% url 'raffle_status' raffle.id %}")
+    .then(response => response.json())
+    .then(data => {
+      updateSalesProgress(data);
+      updateReservationCountdownFromData(data);
+
+      data.forEach(item => {
+        const box = document.getElementById("number-" + item.number);
+
+        if (!box) return;
+
+        box.classList.remove("available", "reserved", "sold", "mine");
+
+        if (item.is_mine) {
+          box.classList.add("mine");
+        } else if (item.is_sold) {
+          box.classList.add("sold");
+        } else if (item.is_reserved) {
+          box.classList.add("reserved");
+        } else {
+          box.classList.add("available");
+        }
+
+        const isSelectable = canParticipate && !item.is_mine && !item.is_sold && !item.is_reserved;
+        ensureSelectableState(box, item.number, isSelectable);
+      });
+    });
+}
+
+if (clearSelectionBtn) {
+  clearSelectionBtn.addEventListener("click", () => {
+    reserveForm.querySelectorAll('input[name="numbers[]"]:checked').forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    updateNumbers().catch(() => {});
+
+    if (clearSelectionFeedback) {
+      clearSelectionFeedback.classList.remove("d-none");
+      setTimeout(() => {
+        clearSelectionFeedback.classList.add("d-none");
+      }, 2000);
+    }
+  });
+}
+
+updateNumbers().catch(() => {});
+setInterval(updateNumbers, 5000);
+setInterval(renderReservationCountdown, 1000);
+</script>
+<hr>
+<script>
+const protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+const raffleId = "{{ raffle.id }}";
+const socket = new WebSocket(
+  protocol + window.location.host +
+    '/ws/raffle/' + raffleId + '/'
+);
+
+socket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+
+    data.numbers.forEach(num => {
+        const box = document.getElementById("number-" + num);
+        if (box) {
+      box.classList.remove("available", "mine", "sold");
+            box.classList.add("reserved");
+      ensureSelectableState(box, num, false);
+        }
+    });
+
+    updateNumbers().catch(() => {});
+};
+</script>
+
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

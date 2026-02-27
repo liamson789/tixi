@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ raffle.title }} - Detalles{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>{{ raffle.title }}</h1>
+
+    <div class="alert alert-info">
+        <h4>Información de la Rifa</h4>
+        <p><strong>Descripción:</strong> {{ raffle.description }}</p>
+        <p><strong>Precio por número:</strong> ${{ raffle.price_per_number }}</p>
+        <p><strong>Porcentaje mínimo de ventas:</strong> {{ raffle.min_sales_percentage }}%</p>
+        <p><strong>Fecha de sorteo:</strong> {{ raffle.draw_date }}</p>
+        <p><strong>Activa:</strong> {% if raffle.is_active %}✅ Sí{% else %}❌ No{% endif %}</p>
+    </div>
+
+    <div class="alert alert-warning">
+        <h4>Estadísticas</h4>
+        <p><strong>Total de números:</strong> {{ total }}</p>
+        <p><strong>Números vendidos:</strong> {{ sold }}</p>
+        <p><strong>Progreso:</strong> {{ percentage|floatformat:2 }}%</p>
+        
+        <div style="background:lightgray; height:30px; margin-top:10px; border-radius:5px; overflow:hidden;">
+            <div style="background:rgb(118, 255, 118); height:100%; width:{{ percentage }}%; transition:width 0.3s;"></div>
+        </div>
+
+        {% if percentage >= raffle.min_sales_percentage %}
+            <p style="color:green; margin-top:10px;"><strong>✅ Rifa lista para sorteo</strong></p>
+        {% else %}
+            <p style="color:red; margin-top:10px;"><strong>❌ Aún no alcanza el mínimo ({{ raffle.min_sales_percentage }}%)</strong></p>
+        {% endif %}
+    </div>
+
+    <div class="mt-4">
+        <h4>Acciones</h4>
+        <div class="btn-group" role="group">
+            <a href="{% url 'dashboard:add_list' raffle.id %}" class="btn btn-primary">Agregar Lista de Números</a>
+            
+            {% if percentage >= raffle.min_sales_percentage and raffle.is_active %}
+                <a href="{% url 'dashboard:manual_draw' raffle.id %}" class="btn btn-success" 
+                   onclick="return confirm('¿Realizar sorteo ahora? Esta acción no se puede deshacer.')">
+                    🎲 Realizar Sorteo
+                </a>
+            {% endif %}
+            
+            <a href="{% url 'dashboard:home' %}" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <h4>Listas de Números</h4>
+    {% if raffle.rafflelist_set.all %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Rango</th>
+                    <th>Total</th>
+                    <th>Vendidos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in raffle.rafflelist_set.all %}
+                    <tr>
+                        <td>{{ list.name }}</td>
+                        <td>{{ list.start_number }} - {{ list.end_number }}</td>
+                        <td>{{ list.end_number|add:1|add:list.start_number|add:"-1" }}</td>
+                        <td>
+                            {% with sold=list.rafflenumber_set.filter.is_sold.count %}
+                                {{ sold }}
+                            {% endwith %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">No hay listas de números aún.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -11,6 +11,45 @@ class Raffle(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+#Media (images/videos for raffle)
+class RaffleMedia(models.Model):
+    MEDIA_TYPES = (
+        ('image', 'Imagen'),
+        ('video', 'Video'),
+    )
+
+    raffle = models.ForeignKey(
+        Raffle,
+        related_name='media',
+        on_delete=models.CASCADE
+    )
+    file = models.FileField(upload_to='raffles/%Y/%m/%d/')
+    media_type = models.CharField(max_length=10, choices=MEDIA_TYPES)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-uploaded_at']
+
+    def __str__(self):
+        return f"{self.raffle.title} - {self.get_media_type_display()}"
+
+
+class HomeCarouselSlide(models.Model):
+    title = models.CharField(max_length=120)
+    subtitle = models.CharField(max_length=180, blank=True)
+    image = models.FileField(upload_to='branding/carousel/%Y/%m/%d/')
+    link_url = models.URLField(blank=True)
+    is_active = models.BooleanField(default=True)
+    display_order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['display_order', '-created_at']
+
+    def __str__(self):
+        return f"Slide: {self.title}"
+
 #Listas
 class RaffleList(models.Model):
     raffle = models.ForeignKey(Raffle, related_name='lists', on_delete=models.CASCADE)

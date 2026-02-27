@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load account %}
+{% load static %}
+
+{% block title %}Confirmar correo - TixiPWA{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-shell {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .auth-card {
+    border: 0;
+    border-radius: 14px;
+  }
+
+  .auth-brand {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .auth-logo {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+    margin-bottom: 0.75rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="auth-shell py-3 py-md-4">
+  <div class="card auth-card shadow-sm">
+    <div class="card-body p-4 p-md-5 text-center">
+      <div class="auth-brand">
+        <img src="{% static 'accounts/auth-logo.jpeg' %}" alt="Logo TixiPWA" class="auth-logo">
+        <h2 class="h3 mb-3">Confirmar correo electrónico</h2>
+      </div>
+
+      {% if confirmation %}
+        {% user_display confirmation.email_address.user as user_display %}
+        <p class="text-muted mb-4">
+          Vas a confirmar el correo <strong>{{ confirmation.email_address.email }}</strong> de la cuenta de {{ user_display }}.
+        </p>
+
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary w-100 mb-2">Confirmar correo</button>
+        </form>
+      {% else %}
+        <p class="text-muted mb-4">
+          Este enlace ya no es válido o expiró. Solicita una nueva verificación desde tu cuenta.
+        </p>
+      {% endif %}
+
+      <a href="{% url 'account_login' %}" class="btn btn-outline-secondary w-100">Ir a iniciar sesión</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

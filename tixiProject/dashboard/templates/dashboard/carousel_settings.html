@@ -1,0 +1,232 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Configuración de Carrusel{% endblock %}
+
+{% block content %}
+<div class="container carousel-settings-page py-4 py-lg-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 page-header-wrap">
+        <div>
+            <h1 class="mb-1">🖼️ Configuración de Carrusel</h1>
+            <p class="text-muted mb-0">Sube y administra imágenes de branding para la home pública.</p>
+        </div>
+        <a href="{% url 'dashboard:home' %}" class="btn btn-outline-primary btn-back">Volver al dashboard</a>
+    </div>
+
+    <div class="card panel-card mb-4">
+        <div class="card-header panel-header panel-header-primary text-white">
+            <h5 class="mb-0">{% if editing_slide %}Editar slide{% else %}Nuevo slide{% endif %}</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" class="row g-3">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="{% if editing_slide %}update{% else %}create{% endif %}">
+                {% if editing_slide %}
+                    <input type="hidden" name="slide_id" value="{{ editing_slide.id }}">
+                {% endif %}
+
+                <div class="col-md-6">
+                    <label class="form-label" for="id_title">Título</label>
+                    {{ form.title }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="id_subtitle">Subtítulo (opcional)</label>
+                    {{ form.subtitle }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="id_image">Imagen</label>
+                    {{ form.image }}
+                    {% if editing_slide and editing_slide.image %}
+                        <small class="text-muted d-block mt-1">Si no seleccionas una nueva imagen, se conserva la actual.</small>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="id_link_url">Enlace (opcional)</label>
+                    {{ form.link_url }}
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="id_display_order">Orden</label>
+                    {{ form.display_order }}
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <div class="form-check">
+                        {{ form.is_active }}
+                        <label class="form-check-label" for="id_is_active">Activo</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary form-action-btn">
+                        <i class="bi {% if editing_slide %}bi-pencil-square{% else %}bi-upload{% endif %}"></i>
+                        {% if editing_slide %}Actualizar slide{% else %}Guardar slide{% endif %}
+                    </button>
+                    {% if editing_slide %}
+                        <a href="{% url 'dashboard:carousel_settings' %}" class="btn btn-outline-secondary ms-2 form-action-btn">Cancelar edición</a>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card panel-card">
+        <div class="card-header panel-header panel-header-dark text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Slides cargados</h5>
+            <span class="badge counter-badge">{{ slides|length }}</span>
+        </div>
+        <div class="card-body p-0">
+            {% if slides %}
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0 slides-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Preview</th>
+                                <th>Título</th>
+                                <th>Orden</th>
+                                <th>Estado</th>
+                                <th class="text-end">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for slide in slides %}
+                                <tr>
+                                    <td>
+                                        <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="slide-preview">
+                                    </td>
+                                    <td>
+                                        <div class="fw-semibold">{{ slide.title }}</div>
+                                        {% if slide.subtitle %}
+                                            <small class="text-muted">{{ slide.subtitle }}</small>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ slide.display_order }}</td>
+                                    <td>
+                                        {% if slide.is_active %}
+                                            <span class="badge state-badge state-badge-active">Activo</span>
+                                        {% else %}
+                                            <span class="badge state-badge state-badge-inactive">Inactivo</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-end">
+                                        <div class="d-inline-flex gap-2 row-actions">
+                                            <form method="post" class="m-0">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="toggle">
+                                                <input type="hidden" name="slide_id" value="{{ slide.id }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-primary">{% if slide.is_active %}Desactivar{% else %}Activar{% endif %}</button>
+                                            </form>
+                                            <a href="{% url 'dashboard:carousel_settings' %}?edit={{ slide.id }}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                            <form method="post" class="m-0" onsubmit="return confirm('¿Eliminar este slide?');">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="delete">
+                                                <input type="hidden" name="slide_id" value="{{ slide.id }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="p-4 text-muted">No hay slides configurados todavía.</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .carousel-settings-page {
+        max-width: 1140px;
+    }
+
+    .panel-card {
+        border: 1px solid #F3F4F6;
+        border-radius: 12px;
+        box-shadow: 0 6px 14px rgba(17, 24, 39, 0.08);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .panel-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(17, 24, 39, 0.12);
+    }
+
+    .panel-header {
+        font-weight: 600;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .panel-header-primary {
+        background: linear-gradient(135deg, #22C55E 0%, #22C55E 100%);
+    }
+
+    .panel-header-dark {
+        background: linear-gradient(135deg, #0F172A 0%, #0F172A 100%);
+    }
+
+    .counter-badge {
+        background-color: #ffffff !important;
+        color: #0F172A !important;
+    }
+
+    .slides-table th {
+        font-weight: 600;
+    }
+
+    .slide-preview {
+        width: 120px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #F3F4F6;
+    }
+
+    .state-badge {
+        font-weight: 600;
+        border-radius: 999px;
+        padding: 6px 10px;
+    }
+
+    .state-badge-active {
+        background-color: #22C55E !important;
+        color: #ffffff !important;
+    }
+
+    .state-badge-inactive {
+        background-color: #9ca3af !important;
+        color: #ffffff !important;
+    }
+
+    .form-action-btn {
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+    @media (max-width: 767.98px) {
+        .page-header-wrap {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 12px;
+        }
+
+        .btn-back,
+        .form-action-btn {
+            width: 100%;
+        }
+
+        .row-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .row-actions .btn,
+        .row-actions form {
+            width: 100%;
+        }
+
+        .slide-preview {
+            width: 88px;
+            height: 56px;
+        }
+    }
+</style>
+{% endblock %}

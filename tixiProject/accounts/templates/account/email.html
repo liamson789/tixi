@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gestionar correo - TixiPWA{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-shell {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .auth-card {
+    border: 0;
+    border-radius: 14px;
+  }
+
+  .auth-brand {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .auth-logo {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+    margin-bottom: 0.75rem;
+  }
+
+  .email-item {
+    border: 1px solid var(--bs-border-color);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.75rem;
+    transition: border-color .2s ease, background-color .2s ease;
+  }
+
+  .email-item:has(input:checked) {
+    border-color: var(--bs-primary);
+    background-color: rgba(34, 197, 94, 0.08);
+  }
+
+  .email-radio {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+  
+  .email-meta {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+
+  .email-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="auth-shell py-3 py-md-4">
+  <div class="card auth-card shadow-sm">
+    <div class="card-body p-4 p-md-5">
+      <div class="auth-brand">
+        <img src="{% static 'accounts/auth-logo.jpeg' %}" alt="Logo TixiPWA" class="auth-logo">
+        <h2 class="h3 mb-2">Gestionar correos</h2>
+        <p class="text-muted mb-4">Administra tus direcciones de correo y su verificación.</p>
+      </div>
+
+      {% if user.emailaddress_set.all %}
+        <form action="{% url 'account_email' %}" method="post" class="mb-4">
+          {% csrf_token %}
+
+          {% for emailaddress in user.emailaddress_set.all %}
+            <label for="email_radio_{{ forloop.counter }}" class="email-item d-block">
+              <span class="email-radio">
+                <input
+                  id="email_radio_{{ forloop.counter }}"
+                  type="radio"
+                  name="email"
+                  class="form-check-input mt-1"
+                  {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked{% endif %}
+                  value="{{ emailaddress.email }}"
+                >
+                <span class="flex-grow-1">
+                  <span class="fw-semibold d-block">{{ emailaddress.email }}</span>
+                  <span class="email-meta mt-1">
+                    {% if emailaddress.verified %}
+                      <span class="badge bg-success">Verificado</span>
+                    {% else %}
+                      <span class="badge bg-warning text-dark">No verificado</span>
+                    {% endif %}
+                    {% if emailaddress.primary %}
+                      <span class="badge bg-primary">Principal</span>
+                    {% endif %}
+                  </span>
+                </span>
+              </span>
+            </label>
+          {% endfor %}
+
+          <div class="email-actions mt-3">
+            <button class="btn btn-outline-primary" type="submit" name="action_primary">Marcar como principal</button>
+            <button class="btn btn-outline-secondary" type="submit" name="action_send">Reenviar verificación</button>
+            <button class="btn btn-outline-danger" type="submit" name="action_remove">Eliminar correo</button>
+          </div>
+        </form>
+      {% else %}
+        <div class="alert alert-light border mb-4" role="alert">
+          No tienes correos registrados todavía.
+        </div>
+      {% endif %}
+
+      {% if can_add_email %}
+        <h3 class="h5 mb-3">Agregar nuevo correo</h3>
+        <form method="post" action="{% url 'account_email' %}" class="row g-3">
+          {% csrf_token %}
+
+          <div class="col-12">
+            <label for="id_email" class="form-label">Correo electrónico</label>
+            <input
+              type="email"
+              name="email"
+              id="id_email"
+              value="{{ form.email.value|default:'' }}"
+              class="form-control{% if form.email.errors %} is-invalid{% endif %}"
+              placeholder="correo@ejemplo.com"
+              required
+            >
+            {% for error in form.email.errors %}
+              <div class="invalid-feedback d-block">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="col-12">
+            <button name="action_add" type="submit" class="btn btn-primary">Agregar correo</button>
+          </div>
+        </form>
+      {% endif %}
+
+      <div class="mt-4">
+        <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary">Volver al perfil</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

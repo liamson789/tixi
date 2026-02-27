@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load socialaccount static %}
+
+{% block title %}Crear cuenta - TixiPWA{% endblock %}
+
+{% block extra_css %}
+<style>
+  .auth-shell {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .auth-card {
+    border: 0;
+    border-radius: 14px;
+  }
+
+  .auth-brand {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .auth-logo {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+    margin-bottom: 0.75rem;
+  }
+
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--bs-secondary-color);
+    font-size: 0.9rem;
+  }
+
+  .auth-divider::before,
+  .auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--bs-border-color);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="auth-shell py-3 py-md-4">
+  <div class="card auth-card shadow-sm">
+    <div class="card-body p-4 p-md-5">
+      <div class="auth-brand">
+        <img src="{% static 'accounts/auth-logo.jpeg' %}" alt="Logo TixiPWA" class="auth-logo">
+        <h2 class="h3 mb-2">Crear cuenta</h2>
+        <p class="text-muted mb-4">Regístrate con tus datos o continúa con Google.</p>
+      </div>
+
+      {% if redirect_field_value %}
+        <a href="{% provider_login_url 'google' process='login' next=redirect_field_value %}" class="btn btn-outline-dark w-100 mb-3">
+          <span aria-hidden="true">🟢</span> Continuar con Google
+        </a>
+      {% else %}
+        <a href="{% provider_login_url 'google' process='login' %}" class="btn btn-outline-dark w-100 mb-3">
+          <span aria-hidden="true">🟢</span> Continuar con Google
+        </a>
+      {% endif %}
+
+      <div class="auth-divider mb-3">o crea tu cuenta</div>
+
+      <form method="post" action="{% url 'account_signup' %}" novalidate>
+        {% csrf_token %}
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+        {% endif %}
+
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+              <div>{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% for field in form %}
+          <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            <input
+              type="{% if field.name == 'password1' or field.name == 'password2' %}password{% elif field.field.widget.input_type %}{{ field.field.widget.input_type }}{% else %}text{% endif %}"
+              name="{{ field.html_name }}"
+              id="{{ field.id_for_label }}"
+              class="form-control{% if field.errors %} is-invalid{% endif %}"
+              value="{% if field.value and field.name != 'password1' and field.name != 'password2' %}{{ field.value }}{% endif %}"
+              {% if field.field.required %}required{% endif %}
+            >
+            {% if field.help_text %}
+              <div class="form-text">{{ field.help_text|safe }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+              <div class="invalid-feedback d-block">{{ error }}</div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary w-100">Crear cuenta</button>
+      </form>
+
+      <div class="text-center mt-4">
+        {% if redirect_field_value %}
+          <a href="{% url 'account_login' %}?next={{ redirect_field_value|urlencode }}">Ya tengo cuenta</a>
+        {% else %}
+          <a href="{% url 'account_login' %}">Ya tengo cuenta</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

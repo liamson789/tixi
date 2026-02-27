@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Lista de Números - {{ raffle.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Agregar Lista de Números</h1>
+    <h3>Rifa: {{ raffle.title }}</h3>
+
+    <form method="POST" class="mt-4">
+        {% csrf_token %}
+        
+        <div class="form-group mb-3">
+            <label for="name">Nombre de la Lista</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="start">Número Inicial</label>
+            <input type="number" class="form-control" id="start" name="start" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="end">Número Final</label>
+            <input type="number" class="form-control" id="end" name="end" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Crear Lista</button>
+        <a href="{% url 'dashboard:raffle_detail' raffle.id %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+    <div class="alert alert-info mt-3">
+        <strong>Nota:</strong> Se crearán números secuenciales desde el número inicial hasta el final (inclusive).
+    </div>
+</div>
+{% endblock %}

@@ -10,6 +10,8 @@ from .models import Raffle, RaffleList, RaffleNumber
 from payments.models import Purchase
 from raffles.services import finalize_raffle_numbers, release_reserved_numbers
 
+from rest_framework.test import APIClient
+
 
 class RaffleReservationTestCase(TestCase):
     """Prueba completa del flujo: reservar números → pago exitoso → números vendidos"""
@@ -218,3 +220,38 @@ class RaffleReservationTestCase(TestCase):
                 not num.is_reserved and not num.is_sold,
                 "Los números deben estar disponibles nuevamente"
             )
+
+        def test_api_available_numbers(self):
+            client = APIClient()
+            # Create some reserved numbers to ensure filtering
+            # Reserve 1 and 2
+            purchase = Purchase.objects.create(
+                user=self.user,
+                raffle=self.raffle,
+                amount=Decimal('20.00'),
+                reference=f"TIXI-{uuid.uuid4()}",
+                status='pending'
+            )
+            for n in [1, 2]:
+                num = RaffleNumber.objects.get(raffle_list=self.raffle_list, number=n)
+                num.reserve(purchase)
+
+            resp = client.get(f"/api/lists/{self.raffle_list.id}/available/")
+            self.assertEqual(resp.status_code, 200)
+            data = resp.json()
+            self.assertIn('available_numbers', data)
+            self.assertNotIn(1, data['available_numbers'])
+
+        def test_api_reserve_numbers_authenticated(self):
+            client = APIClient()
+            client.force_authenticate(user=self.user)
+
+            payload = {
+                'raffle_id': self.raffle.id,
+                'numbers': [50, 51]
+            }
+
+            resp = client.post('/api/reserve/', payload, format='json')
+            self.assertIn(resp.status_code, (201, 200))
+            data = resp.json()
+            self.assertIn('purchase_id', data)

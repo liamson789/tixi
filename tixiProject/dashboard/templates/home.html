@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1>📊 Panel de Control</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="{% url 'dashboard:raffle_create' %}" class="btn btn-primary btn-lg">
+                ➕ Nueva Rifa
+            </a>
+        </div>
+    </div>
+
+    {% if raffle_data %}
+        <div class="row">
+            {% for item in raffle_data %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 border-left-4" style="border-left: 5px solid {% if item.ready_for_draw %}#22C55E{% else %}#EF4444{% endif %};">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.raffle.title }}</h5>
+                            
+                            <div class="mb-3">
+                                <p class="text-muted">{{ item.raffle.description }}</p>
+                            </div>
+
+                            <div class="stats mb-3">
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <h6 class="text-muted">Total Números</h6>
+                                        <h4>{{ item.total_numbers }}</h4>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6 class="text-muted">Vendidos</h6>
+                                        <h4 class="text-success">{{ item.sold_numbers }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="progress mb-3" style="height: 25px;">
+                                <div class="progress-bar bg-success" role="progressbar" 
+                                     style="width: {{ item.percentage }}%;" 
+                                     aria-valuenow="{{ item.percentage }}" 
+                                     aria-valuemin="0" aria-valuemax="100">
+                                    {{ item.percentage|floatformat:1 }}%
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="text-muted mb-1">Ingresos</p>
+                                        <h5 class="text-primary">${{ item.revenue }}</h5>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="text-muted mb-1">Requerido</p>
+                                        <h5>{{ item.raffle.min_sales_percentage }}%</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% if item.ready_for_draw %}
+                                <div class="alert alert-success mb-3">
+                                    ✅ <strong>Lista para sorteo</strong>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-warning mb-3">
+                                    ⚠️ Aún no alcanza el mínimo ({{ item.raffle.min_sales_percentage }}%)
+                                </div>
+                            {% endif %}
+
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'dashboard:raffle_detail' item.raffle.id %}" 
+                                   class="btn btn-outline-primary">
+                                    👁️ Ver Detalles
+                                </a>
+                                <a href="{% url 'dashboard:add_list' item.raffle.id %}" 
+                                   class="btn btn-outline-secondary">
+                                    ➕ Agregar Lista
+                                </a>
+                                {% if item.ready_for_draw and item.raffle.is_active %}
+                                    <a href="{% url 'dashboard:manual_draw' item.raffle.id %}" 
+                                       class="btn btn-success"
+                                       onclick="return confirm('¿Realizar sorteo ahora? Esta acción no se puede deshacer.')">
+                                        🎲 Realizar Sorteo
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center p-5">
+            <h4>📭 No hay rifas aún</h4>
+            <p>Comienza creando una nueva rifa para empezar.</p>
+            <a href="{% url 'dashboard:raffle_create' %}" class="btn btn-primary mt-3">
+                ➕ Crear Primera Rifa
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    }
+    
+    .stats {
+        background-color: #FFFFFF;
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .progress-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: white;
+    }
+</style>
+{% endblock %}
+

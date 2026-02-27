@@ -1,0 +1,108 @@
+{% extends "raffles/base.html" %}
+
+{% block title %}Ganadores{% endblock %}
+
+{% block extra_css %}
+<style>
+  .winners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.1rem;
+  }
+
+  .winner-card {
+    border: 1px solid #F3F4F6;
+    border-radius: 12px;
+    padding: 1rem;
+    background: #FFFFFF;
+    box-shadow: 0 6px 14px rgba(17, 24, 39, 0.08);
+  }
+
+  .winner-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .winner-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    object-fit: cover;
+    border: 1px solid #F3F4F6;
+  }
+
+  .winner-avatar-fallback {
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    border: 1px solid #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F9FAFB;
+  }
+
+  .winner-number {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 999px;
+    font-weight: 600;
+    color: #0F172A;
+    background: rgba(251, 191, 36, 0.22);
+    border: 1px solid rgba(251, 191, 36, 0.55);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4 mb-5">
+  <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
+    <div>
+      <h1 class="mb-1">🏆 Ganadores</h1>
+      <p class="text-muted mb-0">Historial público de rifas finalizadas</p>
+    </div>
+    <a href="{% url 'home' %}" class="btn btn-outline-dark">Ver rifas</a>
+  </div>
+
+  {% if winner_rows %}
+    <div class="winners-grid">
+      {% for item in winner_rows %}
+        <article class="winner-card">
+          <div class="winner-header">
+            {% if item.winner_avatar_url %}
+              <img src="{{ item.winner_avatar_url }}" alt="Foto de {{ item.winner_name }}" class="winner-avatar" loading="lazy">
+            {% else %}
+              <div class="winner-avatar-fallback">👤</div>
+            {% endif %}
+            <div>
+              <h5 class="mb-1">{{ item.winner_name }}</h5>
+              <p class="text-muted mb-0">Alias: {{ item.buyer_alias }}</p>
+            </div>
+          </div>
+
+          <h6 class="mb-2">{{ item.raffle_title }}</h6>
+          <p class="mb-2"><span class="winner-number">🎟️ #{{ item.winner_number }}</span></p>
+          <p class="mb-3 text-muted">Sorteado el {{ item.executed_at|date:"d/m/Y H:i" }}</p>
+          <div class="alert alert-light border py-2 px-3 mb-3">
+            <p class="mb-1 small text-muted">Comentario del ganador</p>
+            {% if item.winner_comment %}
+              <p class="mb-0">{{ item.winner_comment|linebreaksbr }}</p>
+            {% elif item.winner_comment_exists and not item.winner_comment_enabled %}
+              <p class="mb-0 text-muted">El ganador ya dejó un comentario, pero está pendiente de activación por el administrador.</p>
+            {% else %}
+              <p class="mb-0 text-muted">El ganador aún no ha dejado su comentario.</p>
+            {% endif %}
+          </div>
+          <a href="{% url 'raffle_detail' item.raffle_id %}" class="btn btn-sm btn-primary">Ver rifa</a>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-light border mb-0">Aún no hay sorteos ejecutados para mostrar ganadores.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -13,3 +13,8 @@ celery==5.3.4
 redis==5.0.1
 requests==2.31.0
 python-decouple==3.8
+django-extensions==4.1
+cryptography
+channels==4.1.0
+channels-redis==4.2.0
+
