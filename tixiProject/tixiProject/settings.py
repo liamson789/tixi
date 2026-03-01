@@ -123,9 +123,19 @@ WSGI_APPLICATION = 'tixiProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASE_URL = config('DATABASE_URL', default='')
+DATABASE_URL = config('DATABASE_URL', default='').strip()
+
+if DATABASE_URL.upper().startswith('DATABASE_URL='):
+    DATABASE_URL = DATABASE_URL.split('=', 1)[1].strip()
+
+DATABASE_URL = DATABASE_URL.strip('"').strip("'")
 
 if DATABASE_URL:
+    if '://' not in DATABASE_URL:
+        raise ValueError(
+            "DATABASE_URL inválida. Usa formato completo, por ejemplo: "
+            "postgresql://USER:PASSWORD@HOST:PORT/DBNAME?sslmode=require"
+        )
     DATABASES = {
         'default': dj_database_url.parse(
             DATABASE_URL,
@@ -225,7 +235,7 @@ LOGGING = {
 
 CSRF_TRUSTED_ORIGINS = config(
     'CSRF_TRUSTED_ORIGINS',
-    default='https://perspiry-julius-revelatory.ngrok-free.dev',
+    default='https://tixxi.io,https://www.tixxi.io',
     cast=Csv()
 )
 
@@ -233,7 +243,7 @@ CSRF_TRUSTED_ORIGINS = config(
 ALLOWED_HOSTS = [
     host.strip() for host in config(
         'ALLOWED_HOSTS',
-        default='localhost,127.0.0.1,perspiry-julius-revelatory.ngrok-free.dev',
+        default='tixxi.io,www.tixxi.io',
         cast=Csv()
     ) if host.strip()
 ]
