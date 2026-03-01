@@ -12,7 +12,7 @@
     </div>
 
     {% if form.errors %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             <h5 class="alert-heading"><i class="bi bi-exclamation-circle"></i> Errores en el formulario</h5>
             <hr>
             {% for field, errors in form.errors.items %}
@@ -39,7 +39,7 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="id_title" class="form-label">Título de la Rifa <span class="text-danger">*</span></label>
+                    <label for="id_title" class="form-label">Título de la Rifa <span class="text-success">*</span></label>
                     <input type="text" class="form-control {% if form.title.errors %}is-invalid{% endif %}" 
                            id="id_title" name="title" placeholder="Ej: iPhone 15 Pro Max" 
                            value="{{ form.title.value|default:'' }}" required>
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="id_description" class="form-label">Descripción <span class="text-danger">*</span></label>
+                    <label for="id_description" class="form-label">Descripción <span class="text-success">*</span></label>
                     <textarea class="form-control {% if form.description.errors %}is-invalid{% endif %}" 
                               id="id_description" name="description" rows="4" 
                               placeholder="Describe el producto, características, condiciones..." 
@@ -71,7 +71,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="id_price_per_number" class="form-label">Precio por Número <span class="text-danger">*</span></label>
+                        <label for="id_price_per_number" class="form-label">Precio por Número <span class="text-success">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text">$</span>
                             <input type="number" class="form-control {% if form.price_per_number.errors %}is-invalid{% endif %}" 
@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="id_min_sales_percentage" class="form-label">Min. de Ventas Requerido (%) <span class="text-danger">*</span></label>
+                        <label for="id_min_sales_percentage" class="form-label">Min. de Ventas Requerido (%) <span class="text-success">*</span></label>
                         <div class="input-group">
                             <input type="number" class="form-control {% if form.min_sales_percentage.errors %}is-invalid{% endif %}" 
                                    id="id_min_sales_percentage" name="min_sales_percentage" 
@@ -110,7 +110,7 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="id_draw_date" class="form-label">Fecha y Hora del Sorteo <span class="text-danger">*</span></label>
+                    <label for="id_draw_date" class="form-label">Fecha y Hora del Sorteo <span class="text-success">*</span></label>
                     <input type="datetime-local" class="form-control {% if form.draw_date.errors %}is-invalid{% endif %}" 
                            id="id_draw_date" name="draw_date" 
                            value="{{ form.draw_date.value|default:'' }}"
@@ -130,7 +130,7 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="id_list_name" class="form-label">Nombre de la Lista <span class="text-danger">*</span></label>
+                    <label for="id_list_name" class="form-label">Nombre de la Lista <span class="text-success">*</span></label>
                     <input type="text" class="form-control {% if form.list_name.errors %}is-invalid{% endif %}"
                            id="id_list_name" name="list_name" placeholder="Ej: Lista 1, Lista Principal"
                            value="{{ form.list_name.value|default:'' }}" required>
@@ -142,7 +142,7 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="id_list_start" class="form-label">Numero Inicial <span class="text-danger">*</span></label>
+                        <label for="id_list_start" class="form-label">Numero Inicial <span class="text-success">*</span></label>
                         <input type="number" class="form-control {% if form.list_start.errors %}is-invalid{% endif %}"
                                id="id_list_start" name="list_start" placeholder="1" min="0"
                                value="{{ form.list_start.value|default:'' }}" required>
@@ -153,7 +153,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="id_list_end" class="form-label">Numero Final <span class="text-danger">*</span></label>
+                        <label for="id_list_end" class="form-label">Numero Final <span class="text-success">*</span></label>
                         <input type="number" class="form-control {% if form.list_end.errors %}is-invalid{% endif %}"
                                id="id_list_end" name="list_end" placeholder="100" min="0"
                                value="{{ form.list_end.value|default:'' }}" required>
@@ -240,7 +240,7 @@
 
     .panel-header-primary { background: linear-gradient(135deg, #22C55E 0%, #22C55E 100%); }
     .panel-header-success { background: linear-gradient(135deg, #22C55E 0%, #22C55E 100%); }
-    .panel-header-warning { background: linear-gradient(135deg, #EF4444 0%, #EF4444 100%); }
+    .panel-header-warning { background: linear-gradient(135deg, #22C55E 0%, #22C55E 100%); }
     .panel-header-info { background: linear-gradient(135deg, #0F172A 0%, #0F172A 100%); }
     
     .form-label {

@@ -48,7 +48,7 @@
 
   .raffle-closed-alert {
     background-color: #F3F4F6;
-    border: 1px solid #EF4444;
+    border: 1px solid #22C55E;
     color: #0F172A;
   }
 
@@ -76,7 +76,7 @@
   }
 
   .sold {
-    background-color: #EF4444;
+    background-color: #22C55E;
     color: #FFFFFF;
   }
 
@@ -115,7 +115,7 @@
 
   .legend-swatch.available { background-color: #FFFFFF; border-color: #F3F4F6; }
   .legend-swatch.reserved { background-color: #F3F4F6; border-color: #F3F4F6; }
-  .legend-swatch.sold { background-color: #EF4444; border-color: #EF4444; }
+  .legend-swatch.sold { background-color: #22C55E; border-color: #22C55E; }
   .legend-swatch.mine { background-color: #0F172A; border-color: #0F172A; }
 </style>
 {% endblock %}
@@ -154,7 +154,7 @@
         <div class="progress" role="progressbar" aria-label="Porcentaje vendido" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ sold_percentage|floatformat:0 }}">
           <div
             id="sales-progress-bar"
-            class="progress-bar bg-danger"
+            class="progress-bar bg-success"
             style="width: 0%"
             data-initial-percentage="{{ sold_percentage|floatformat:1 }}"
           ></div>

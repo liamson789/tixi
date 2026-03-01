@@ -7,17 +7,17 @@
 - **Blanco (fondo principal)**: `#FFFFFF`
 - **Gris claro (superficies secundarias)**: `#F3F4F6`
 - **Gris medio (texto secundario)**: `#6B7280`
-- **Rojo advertencia/error**: `#EF4444`
+- **Verde de feedback/estados**: `#22C55E`
 
 ## Regla principal
 
-El rojo `#EF4444` se usa **solo** para:
+El verde `#22C55E` se usa para:
 
-- errores
-- alertas críticas
+- confirmaciones
+- alertas
 - estados de número **vendido**
 
-No usar rojo como color primario ni en botones primarios.
+Usar verde como color principal y de estado en toda la interfaz.
 
 ## Uso por componente
 
@@ -47,13 +47,13 @@ No usar rojo como color primario ni en botones primarios.
 
 - Disponible: `#FFFFFF` + borde `#F3F4F6`
 - Reservado: `#F3F4F6` + texto `#6B7280`
-- Vendido: `#EF4444` + texto `#FFFFFF`
+- Vendido: `#22C55E` + texto `#FFFFFF`
 - Seleccionado / mío: `#0F172A` + texto `#FFFFFF`
 
 ### Feedback de sistema
 
 - Éxito / confirmación de pago / progreso completado: `#22C55E`
-- Error / alerta crítica: `#EF4444`
+- Alertas y feedback: `#22C55E`
 
 ## Variables sugeridas (referencia)
 
@@ -63,7 +63,7 @@ No usar rojo como color primario ni en botones primarios.
 --brand-surface: #FFFFFF;
 --brand-border: #F3F4F6;
 --brand-muted: #6B7280;
---brand-danger: #EF4444;
+--brand-danger: #22C55E;
 ```
 
 ## Checklist antes de publicar una vista
@@ -72,4 +72,4 @@ No usar rojo como color primario ni en botones primarios.
 - ¿Las acciones principales están en `#22C55E`?
 - ¿Los títulos importantes usan `#0F172A`?
 - ¿El texto secundario usa `#6B7280`?
-- ¿El rojo `#EF4444` aparece solo en errores/alertas/vendidos?
+- ¿Los estados y alertas usan `#22C55E`?

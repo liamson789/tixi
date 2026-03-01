@@ -19,7 +19,7 @@
         <div class="row">
             {% for item in raffle_data %}
                 <div class="col-md-6 mb-4">
-                    <div class="card h-100 border-left-4" style="border-left: 5px solid {% if item.ready_for_draw %}#22C55E{% else %}#EF4444{% endif %};">
+                    <div class="card h-100 border-left-4" style="border-left: 5px solid {% if item.ready_for_draw %}#22C55E{% else %}#22C55E{% endif %};">
                         <div class="card-body">
                             <h5 class="card-title">{{ item.raffle.title }}</h5>
                             

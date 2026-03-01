@@ -21,7 +21,7 @@
     </div>
 
     {% if form.errors %}
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             <h5 class="alert-heading"><i class="bi bi-exclamation-circle"></i> Errores en el formulario</h5>
             <hr>
             {% for field, errors in form.errors.items %}
@@ -48,7 +48,7 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="id_title" class="form-label">Título de la Rifa <span class="text-danger">*</span></label>
+                    <label for="id_title" class="form-label">Título de la Rifa <span class="text-success">*</span></label>
                     <input type="text" class="form-control {% if form.title.errors %}is-invalid{% endif %}" 
                            id="id_title" name="title" placeholder="Ej: iPhone 15 Pro Max" 
                            value="{{ form.title.value|default:'' }}" required>
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="id_description" class="form-label">Descripción <span class="text-danger">*</span></label>
+                    <label for="id_description" class="form-label">Descripción <span class="text-success">*</span></label>
                     <textarea class="form-control {% if form.description.errors %}is-invalid{% endif %}" 
                               id="id_description" name="description" rows="4" 
                               placeholder="Describe el producto, características, condiciones..." 
@@ -80,7 +80,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="id_price_per_number" class="form-label">Precio por Número <span class="text-danger">*</span></label>
+                        <label for="id_price_per_number" class="form-label">Precio por Número <span class="text-success">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text">$</span>
                             <input type="number" class="form-control {% if form.price_per_number.errors %}is-invalid{% endif %}" 
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="id_min_sales_percentage" class="form-label">Min. de Ventas Requerido (%) <span class="text-danger">*</span></label>
+                        <label for="id_min_sales_percentage" class="form-label">Min. de Ventas Requerido (%) <span class="text-success">*</span></label>
                         <div class="input-group">
                             <input type="number" class="form-control {% if form.min_sales_percentage.errors %}is-invalid{% endif %}" 
                                    id="id_min_sales_percentage" name="min_sales_percentage" 
@@ -119,7 +119,7 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <label for="id_draw_date" class="form-label">Fecha y Hora del Sorteo <span class="text-danger">*</span></label>
+                    <label for="id_draw_date" class="form-label">Fecha y Hora del Sorteo <span class="text-success">*</span></label>
                     <input type="datetime-local" class="form-control {% if form.draw_date.errors %}is-invalid{% endif %}" 
                            id="id_draw_date" name="draw_date" 
                            value="{{ form.draw_date.value|default:'' }}"
@@ -178,7 +178,7 @@
                                         <small class="text-muted d-block text-truncate">{{ media.file.name }}</small>
                                         <button
                                             type="submit"
-                                            class="btn btn-sm btn-outline-danger w-100 mt-2"
+                                            class="btn btn-sm btn-outline-success w-100 mt-2"
                                             formaction="{% url 'dashboard:media_delete' media.id %}"
                                             formmethod="post"
                                             onclick="return confirm('¿Eliminar este archivo?');"
@@ -230,7 +230,7 @@
 
     .panel-header-primary { background: linear-gradient(135deg, #22C55E 0%, #22C55E 100%); }
     .panel-header-success { background: linear-gradient(135deg, #22C55E 0%, #22C55E 100%); }
-    .panel-header-warning { background: linear-gradient(135deg, #EF4444 0%, #EF4444 100%); }
+    .panel-header-warning { background: linear-gradient(135deg, #22C55E 0%, #22C55E 100%); }
 
     .media-card {
         border: 1px solid #F3F4F6;

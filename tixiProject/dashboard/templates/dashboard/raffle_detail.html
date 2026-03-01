@@ -120,7 +120,7 @@
             </a>
         {% endif %}
 
-        <a href="{% url 'dashboard:raffle_delete' raffle.id %}" class="btn btn-danger btn-lg action-btn">
+        <a href="{% url 'dashboard:raffle_delete' raffle.id %}" class="btn btn-success btn-lg action-btn">
             <i class="bi bi-trash"></i> Eliminar
         </a>
     </div>
@@ -252,7 +252,7 @@
                                         <small class="text-muted">{{ media.uploaded_at|date:"d/m/Y H:i" }}</small>
                                         <form method="POST" action="{% url 'dashboard:media_delete' media.id %}" style="display: inline;">
                                             {% csrf_token %}
-                                            <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                            <button type="submit" class="btn btn-sm btn-outline-success">Eliminar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -306,7 +306,7 @@
                                         <a href="{% url 'dashboard:list_edit' list.id %}" class="btn btn-warning btn-sm">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="{% url 'dashboard:list_delete' list.id %}" class="btn btn-danger btn-sm">
+                                        <a href="{% url 'dashboard:list_delete' list.id %}" class="btn btn-success btn-sm">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </div>
@@ -389,7 +389,7 @@
     }
 
     .panel-header-warning {
-        background: linear-gradient(135deg, #EF4444 0%, #EF4444 100%);
+        background: linear-gradient(135deg, #22C55E 0%, #22C55E 100%);
     }
 
     .panel-header-dark {

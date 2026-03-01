@@ -41,21 +41,21 @@
       <label class="form-label" for="id_full_name">Nombre completo</label>
       {{ profile_form.full_name }}
       {% for error in profile_form.full_name.errors %}
-        <div class="text-danger small">{{ error }}</div>
+        <div class="text-success small">{{ error }}</div>
       {% endfor %}
     </div>
     <div class="col-md-6">
       <label class="form-label" for="id_avatar_url">URL de avatar</label>
       {{ profile_form.avatar_url }}
       {% for error in profile_form.avatar_url.errors %}
-        <div class="text-danger small">{{ error }}</div>
+        <div class="text-success small">{{ error }}</div>
       {% endfor %}
     </div>
     <div class="col-md-6">
       <label class="form-label" for="id_contact_phone">Teléfono de contacto</label>
       {{ profile_form.contact_phone }}
       {% for error in profile_form.contact_phone.errors %}
-        <div class="text-danger small">{{ error }}</div>
+        <div class="text-success small">{{ error }}</div>
       {% endfor %}
     </div>
     <div class="col-12">
@@ -79,7 +79,7 @@
     {% endif %}
 
     {% if account_links.logout %}
-      <a href="{{ account_links.logout }}" class="btn btn-outline-danger">Cerrar sesión</a>
+      <a href="{{ account_links.logout }}" class="btn btn-outline-success">Cerrar sesión</a>
     {% endif %}
   </div>
 

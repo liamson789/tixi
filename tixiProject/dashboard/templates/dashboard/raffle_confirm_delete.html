@@ -6,8 +6,8 @@
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card border-danger">
-                <div class="card-header bg-danger text-white">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white">
                     <h5 class="mb-0"><i class="bi bi-exclamation-triangle"></i> Confirmar eliminación</h5>
                 </div>
                 <div class="card-body">
@@ -21,7 +21,7 @@
 
                     <form method="POST" class="d-flex gap-2">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger btn-lg flex-grow-1">
+                        <button type="submit" class="btn btn-success btn-lg flex-grow-1">
                             <i class="bi bi-trash"></i> Sí, eliminar
                         </button>
                         <a href="{% url 'dashboard:raffle_detail' raffle.id %}" class="btn btn-outline-secondary btn-lg flex-grow-1">
