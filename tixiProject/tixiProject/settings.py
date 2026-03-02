@@ -243,7 +243,7 @@ CSRF_TRUSTED_ORIGINS = config(
 ALLOWED_HOSTS = [
     host.strip() for host in config(
         'ALLOWED_HOSTS',
-        default='tixxi.io,www.tixxi.io',
+        default='tixxi.io, www.tixxi.io',
         cast=Csv()
     ) if host.strip()
 ]
