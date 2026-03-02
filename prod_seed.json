@@ -1,0 +1,4121 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Lkmu5vNtLGzjIzLNrYl0Yx$7A5bAKnpMgP3dpYNrFSL/QvwtuJc5d92T0QNVT0bbK8=",
+    "last_login": "2026-02-27T17:25:47.545Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-16T17:50:15.669Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$orKiwmG7OMlSjkcjNBsWyU$iW/zudu34GxtlJiB3OROzevm1gO9oYuHKo8u7BPso0g=",
+    "last_login": "2026-02-19T06:30:58.852Z",
+    "is_superuser": false,
+    "username": "testadmin",
+    "first_name": "",
+    "last_name": "",
+    "email": "testadmin@test.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-16T18:30:55.410Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "!hwk8NemeFjhMf47SUHf4IfkkE3xpsMNtkqynwysA",
+    "last_login": "2026-02-22T03:56:49.624Z",
+    "is_superuser": false,
+    "username": "jorge",
+    "first_name": "Jorge",
+    "last_name": "De Paz",
+    "email": "herbertcioran@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-20T20:05:41.610Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "!H4VAkhiCO3LKceP1pzkQmx37xfmuJ6zVdMAzOOVz",
+    "last_login": "2026-02-23T04:20:18.473Z",
+    "is_superuser": false,
+    "username": "riff",
+    "first_name": "RIFF",
+    "last_name": "ROVER",
+    "email": "liamson789@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-20T20:56:30.715Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$jW7CuBozwtI3vOLwR8cdks$zDEelIf7BS6D4hAcC5Pf6+vx7iRAEHxyzshhvtkG5KE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Mancia5",
+    "first_name": "",
+    "last_name": "",
+    "email": "josemancia1593@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-22T15:38:11.018Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "!XPotPYQHLsz9ZOqmqW6h57xgKgTiyVKfxzFoxA66",
+    "last_login": "2026-02-25T16:06:21.564Z",
+    "is_superuser": false,
+    "username": "savage",
+    "first_name": "Savage",
+    "last_name": "Universe",
+    "email": "jotadepaz895@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-25T16:06:21.439Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "full_name": "Robert",
+    "avatar_url": "https://preview.redd.it/this-new-season-of-gumball-seems-to-be-more-harsh-on-v0-ds3gohiwq3gf1.jpeg?auto=webp&s=01cb74c2b321ed8ffbc6c76743152639012d4efa",
+    "contact_phone": "",
+    "auth_provider": "email",
+    "created_at": "2026-02-20T05:57:38.294Z",
+    "updated_at": "2026-02-20T07:25:50.045Z"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "testadmin"
+    ],
+    "full_name": "",
+    "avatar_url": "",
+    "contact_phone": "",
+    "auth_provider": "email",
+    "created_at": "2026-02-20T05:57:38.300Z",
+    "updated_at": "2026-02-20T05:57:38.300Z"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "full_name": "Jorge De Paz",
+    "avatar_url": "https://lh3.googleusercontent.com/a/ACg8ocIyEC0K7Ewl_s-M6IW2ESQjZE3t-8oPiqnlVi4vXRlZGI1Sta1l=s96-c",
+    "contact_phone": "",
+    "auth_provider": "google",
+    "created_at": "2026-02-20T20:05:41.644Z",
+    "updated_at": "2026-02-20T20:05:41.787Z"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "full_name": "RIFF ROVER",
+    "avatar_url": "https://lh3.googleusercontent.com/a/ACg8ocIqBOrZNfIWQ3yCJOVQNShGVGfUCJ-CE70PPytC-XPNBdvQaUfB=s96-c",
+    "contact_phone": "78787878",
+    "auth_provider": "google",
+    "created_at": "2026-02-20T20:56:30.742Z",
+    "updated_at": "2026-02-22T02:27:03.384Z"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "Mancia5"
+    ],
+    "full_name": "",
+    "avatar_url": "",
+    "contact_phone": "",
+    "auth_provider": "email",
+    "created_at": "2026-02-22T15:38:13.701Z",
+    "updated_at": "2026-02-22T15:38:13.701Z"
+  }
+},
+{
+  "model": "accounts.userprofile",
+  "pk": 6,
+  "fields": {
+    "user": [
+      "savage"
+    ],
+    "full_name": "Savage Universe",
+    "avatar_url": "https://lh3.googleusercontent.com/a/ACg8ocIVox-T4AJHH7Pte0dld_1l1Px9Ckadkizo14sK-ZI7UAs_rUY=s96-c",
+    "contact_phone": "",
+    "auth_provider": "google",
+    "created_at": "2026-02-25T16:06:21.464Z",
+    "updated_at": "2026-02-25T16:06:21.582Z"
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "email": "herbertcioran@gmail.com",
+    "verified": true,
+    "primary": true
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "email": "liamson789@gmail.com",
+    "verified": true,
+    "primary": true
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 4,
+  "fields": {
+    "user": [
+      "Mancia5"
+    ],
+    "email": "josemancia1593@gmail.com",
+    "verified": false,
+    "primary": true
+  }
+},
+{
+  "model": "account.emailaddress",
+  "pk": 5,
+  "fields": {
+    "user": [
+      "savage"
+    ],
+    "email": "jotadepaz895@gmail.com",
+    "verified": true,
+    "primary": true
+  }
+},
+{
+  "model": "socialaccount.socialaccount",
+  "pk": 1,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "provider": "google",
+    "uid": "116391917338066960286",
+    "last_login": "2026-02-22T03:56:49.572Z",
+    "date_joined": "2026-02-20T20:05:41.662Z",
+    "extra_data": {
+      "iss": "https://accounts.google.com",
+      "azp": "977253848982-0jvoq9ifnbhr43situs6s7msjgvnoo2o.apps.googleusercontent.com",
+      "aud": "977253848982-0jvoq9ifnbhr43situs6s7msjgvnoo2o.apps.googleusercontent.com",
+      "sub": "116391917338066960286",
+      "email": "herbertcioran@gmail.com",
+      "email_verified": true,
+      "at_hash": "808rSQmk7T9KrbBlmwn_oA",
+      "name": "Jorge De Paz",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocIyEC0K7Ewl_s-M6IW2ESQjZE3t-8oPiqnlVi4vXRlZGI1Sta1l=s96-c",
+      "given_name": "Jorge",
+      "family_name": "De Paz",
+      "iat": 1771732609,
+      "exp": 1771736209
+    }
+  }
+},
+{
+  "model": "socialaccount.socialaccount",
+  "pk": 2,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "provider": "google",
+    "uid": "111978360935655857419",
+    "last_login": "2026-02-23T04:20:18.397Z",
+    "date_joined": "2026-02-20T20:56:30.758Z",
+    "extra_data": {
+      "iss": "https://accounts.google.com",
+      "azp": "977253848982-0jvoq9ifnbhr43situs6s7msjgvnoo2o.apps.googleusercontent.com",
+      "aud": "977253848982-0jvoq9ifnbhr43situs6s7msjgvnoo2o.apps.googleusercontent.com",
+      "sub": "111978360935655857419",
+      "email": "liamson789@gmail.com",
+      "email_verified": true,
+      "at_hash": "Zlt94c91tfvXwyyXhmEBzA",
+      "name": "RIFF ROVER",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocIqBOrZNfIWQ3yCJOVQNShGVGfUCJ-CE70PPytC-XPNBdvQaUfB=s96-c",
+      "given_name": "RIFF",
+      "family_name": "ROVER",
+      "iat": 1771820417,
+      "exp": 1771824017
+    }
+  }
+},
+{
+  "model": "socialaccount.socialaccount",
+  "pk": 3,
+  "fields": {
+    "user": [
+      "savage"
+    ],
+    "provider": "google",
+    "uid": "116910349203402418329",
+    "last_login": "2026-02-25T16:06:21.478Z",
+    "date_joined": "2026-02-25T16:06:21.478Z",
+    "extra_data": {
+      "iss": "https://accounts.google.com",
+      "azp": "977253848982-0jvoq9ifnbhr43situs6s7msjgvnoo2o.apps.googleusercontent.com",
+      "aud": "977253848982-0jvoq9ifnbhr43situs6s7msjgvnoo2o.apps.googleusercontent.com",
+      "sub": "116910349203402418329",
+      "email": "jotadepaz895@gmail.com",
+      "email_verified": true,
+      "at_hash": "hl7E0cThvpeCBLouxTt4AQ",
+      "name": "Savage Universe",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocIVox-T4AJHH7Pte0dld_1l1Px9Ckadkizo14sK-ZI7UAs_rUY=s96-c",
+      "given_name": "Savage",
+      "family_name": "Universe",
+      "iat": 1772035580,
+      "exp": 1772039180
+    }
+  }
+},
+{
+  "model": "raffles.raffle",
+  "pk": 6,
+  "fields": {
+    "title": "Γ£¿ ┬íParticipa en la gran rifa del Honor Robot Phone ≡ƒô▒",
+    "description": "┬┐Quieres llevarte a casa un smartphone innovador, con dise├▒o futurista y tecnolog├¡a de ├║ltima generaci├│n? Esta es tu oportunidad.\r\nEl Honor Robot Phone combina potencia, estilo y funciones inteligentes que har├ín tu d├¡a a d├¡a m├ís f├ícil y emocionante. Con su rendimiento veloz, c├ímara de alta calidad y dise├▒o ├║nico, se convertir├í en tu mejor aliado para comunicarte, trabajar y divertirte.",
+    "price_per_number": "10.00",
+    "draw_date": "2026-02-26T22:19:00Z",
+    "min_sales_percentage": 10,
+    "is_active": true,
+    "created_at": "2026-02-17T17:00:48.842Z"
+  }
+},
+{
+  "model": "raffles.raffle",
+  "pk": 7,
+  "fields": {
+    "title": "Camiseta Oficial Real Madrid ΓÇô Primera Equipaci├│n 2026/2",
+    "description": "La nueva camiseta del Real Madrid 2026/27 combina tradici├│n y modernidad en un dise├▒o ├║nico. Con el cl├ísico blanco como protagonista, incorpora logotipos en verde oscuro y las ic├│nicas tres rayas en rosa, un gui├▒o a equipaciones hist├│ricas del club. Fabricada con tecnolog├¡a Climacool+ de adidas, ofrece transpirabilidad y comodidad ├│ptima para partidos de alta intensidad. Cada detalle refleja el legado merengue y la grandeza del Santiago Bernab├⌐u, convirti├⌐ndola en una pieza imprescindible para aficionados y coleccionistas.",
+    "price_per_number": "1.00",
+    "draw_date": "2026-02-26T00:27:00Z",
+    "min_sales_percentage": 100,
+    "is_active": true,
+    "created_at": "2026-02-20T06:24:45.391Z"
+  }
+},
+{
+  "model": "raffles.raffle",
+  "pk": 8,
+  "fields": {
+    "title": "JULI├ôN ├üLVAREZ EN CONCIERTO ΓÇô 24 DE ABRIL",
+    "description": "Juli├│n ├ülvarez llega a El Salvador ≡ƒñá≡ƒÄ╢ ≡ƒôà 24 de abril 2026 | ≡ƒôì Estadio Cuscatl├ín ≡ƒÄƒ∩╕Å No te pierdas el concierto de Julion Alvarez y participa en la rifa de entradas para el concierto.",
+    "price_per_number": "5.00",
+    "draw_date": "2026-02-21T19:50:00Z",
+    "min_sales_percentage": 50,
+    "is_active": false,
+    "created_at": "2026-02-21T15:12:09.324Z"
+  }
+},
+{
+  "model": "raffles.raffle",
+  "pk": 9,
+  "fields": {
+    "title": "TV SAMSUNG 55\" Pulgadas 4K UHD QLED Smart TV con IA + Barra de sonido SAMSUNG HW-B400F/ZL",
+    "description": "┬íEs SAMSUNG QLED TV, es impresionante! Con tu TV Q7F disfruta de contenido en una asombrosa resoluci├│n hasta en 4K mejorada gracias a su procesador con inteligencia artificial.",
+    "price_per_number": "1.00",
+    "draw_date": "2026-02-25T19:15:00Z",
+    "min_sales_percentage": 100,
+    "is_active": true,
+    "created_at": "2026-02-22T01:16:57.395Z"
+  }
+},
+{
+  "model": "raffles.raffle",
+  "pk": 10,
+  "fields": {
+    "title": "≡ƒÆ╡ Haz 1 por 100 ≡ƒÆ╡",
+    "description": "Con solo $1 d├│lar puedes ganar $100 d├│lares reales.\r\n≡ƒæë Compra tu boleto y entra autom├íticamente en la rifa.\r\n≡ƒæë Premio garantizado y aut├⌐ntico: 100 d├│lares \r\n\r\nEs simple: invierte 1 y podr├¡as llevarte 100.\r\n≡ƒÄƒ∩╕Å ┬íParticipa ahora y no dejes pasar esta oportunidad!",
+    "price_per_number": "1.00",
+    "draw_date": "2026-03-03T10:00:00Z",
+    "min_sales_percentage": 100,
+    "is_active": true,
+    "created_at": "2026-02-28T16:59:19.423Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 1,
+  "fields": {
+    "raffle": 6,
+    "file": "raffles/2026/02/17/Honor-robot-phone-02_AsTDt08.jpg",
+    "media_type": "image",
+    "uploaded_at": "2026-02-17T17:00:48.910Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 3,
+  "fields": {
+    "raffle": 7,
+    "file": "raffles/2026/02/20/camiseta-real-madrid-adidas-white.jpg",
+    "media_type": "image",
+    "uploaded_at": "2026-02-20T06:24:45.531Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 4,
+  "fields": {
+    "raffle": 7,
+    "file": "raffles/2026/02/20/Camiseta-Real-Madrid-1┬¬-Equipaci├│n-2526Authenticcamisetafutboles.jpg",
+    "media_type": "image",
+    "uploaded_at": "2026-02-20T06:24:45.559Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 5,
+  "fields": {
+    "raffle": 8,
+    "file": "raffles/2026/02/21/julion-alvarez-1.jpg",
+    "media_type": "image",
+    "uploaded_at": "2026-02-21T15:12:09.370Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 8,
+  "fields": {
+    "raffle": 9,
+    "file": "raffles/2026/02/21/8806097640363-006-750Wx750H.webp",
+    "media_type": "image",
+    "uploaded_at": "2026-02-22T01:16:57.487Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 9,
+  "fields": {
+    "raffle": 9,
+    "file": "raffles/2026/02/21/8806095482415-003-750Wx750H.webp",
+    "media_type": "image",
+    "uploaded_at": "2026-02-22T01:16:57.514Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 10,
+  "fields": {
+    "raffle": 9,
+    "file": "raffles/2026/02/21/TV-QLED-55-140-CM-UHD-4K-SAMSUNG-55-Pulgadas-QLED-Uhd-4K-Smart-TV-QN_sTIEHtD.webp",
+    "media_type": "image",
+    "uploaded_at": "2026-02-22T01:16:57.537Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 11,
+  "fields": {
+    "raffle": 8,
+    "file": "raffles/2026/02/21/UIBTK0vGUcHm0mdiMgg78TkY1nZC13zUmmf0knPP.png",
+    "media_type": "image",
+    "uploaded_at": "2026-02-22T01:35:21.773Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 12,
+  "fields": {
+    "raffle": 8,
+    "file": "raffles/2026/02/21/7017B_5656_0OAFEQq.jpg",
+    "media_type": "image",
+    "uploaded_at": "2026-02-22T01:36:00.313Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 13,
+  "fields": {
+    "raffle": 6,
+    "file": "raffles/2026/02/21/honor-robot-phone-6.webp",
+    "media_type": "image",
+    "uploaded_at": "2026-02-22T01:48:23.769Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 14,
+  "fields": {
+    "raffle": 6,
+    "file": "raffles/2026/02/21/f1cbcbd19f08c1872ba4acc23db5c5f3.webp",
+    "media_type": "image",
+    "uploaded_at": "2026-02-22T01:48:51.618Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 15,
+  "fields": {
+    "raffle": 10,
+    "file": "raffles/2026/02/28/Texto_11.png",
+    "media_type": "image",
+    "uploaded_at": "2026-02-28T16:59:19.633Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 16,
+  "fields": {
+    "raffle": 10,
+    "file": "raffles/2026/02/28/Texto_12.png",
+    "media_type": "image",
+    "uploaded_at": "2026-03-01T03:12:03.940Z"
+  }
+},
+{
+  "model": "raffles.rafflemedia",
+  "pk": 17,
+  "fields": {
+    "raffle": 10,
+    "file": "raffles/2026/02/28/Texto_13.png",
+    "media_type": "image",
+    "uploaded_at": "2026-03-01T03:40:15.376Z"
+  }
+},
+{
+  "model": "raffles.homecarouselslide",
+  "pk": 2,
+  "fields": {
+    "title": "TIXI |",
+    "subtitle": "Convierte n├║meros en oportunidades",
+    "image": "branding/carousel/2026/02/24/Participa_hoy._12.png",
+    "link_url": "",
+    "is_active": true,
+    "display_order": 0,
+    "created_at": "2026-02-23T05:42:42.575Z"
+  }
+},
+{
+  "model": "raffles.homecarouselslide",
+  "pk": 3,
+  "fields": {
+    "title": ".",
+    "subtitle": "",
+    "image": "branding/carousel/2026/02/24/Participa_hoy._11.png",
+    "link_url": "",
+    "is_active": true,
+    "display_order": 1,
+    "created_at": "2026-02-23T06:01:32.732Z"
+  }
+},
+{
+  "model": "raffles.homecarouselslide",
+  "pk": 4,
+  "fields": {
+    "title": ".",
+    "subtitle": "",
+    "image": "branding/carousel/2026/02/24/Participa_hoy._10.png",
+    "link_url": "",
+    "is_active": true,
+    "display_order": 2,
+    "created_at": "2026-02-23T06:32:01.683Z"
+  }
+},
+{
+  "model": "raffles.rafflelist",
+  "pk": 10,
+  "fields": {
+    "raffle": 6,
+    "name": "LT01",
+    "start_number": 1,
+    "end_number": 100
+  }
+},
+{
+  "model": "raffles.rafflelist",
+  "pk": 12,
+  "fields": {
+    "raffle": 7,
+    "name": "LT01",
+    "start_number": 1,
+    "end_number": 10
+  }
+},
+{
+  "model": "raffles.rafflelist",
+  "pk": 13,
+  "fields": {
+    "raffle": 8,
+    "name": "LT01",
+    "start_number": 1,
+    "end_number": 10
+  }
+},
+{
+  "model": "raffles.rafflelist",
+  "pk": 14,
+  "fields": {
+    "raffle": 9,
+    "name": "LT01",
+    "start_number": 1,
+    "end_number": 10
+  }
+},
+{
+  "model": "raffles.rafflelist",
+  "pk": 15,
+  "fields": {
+    "raffle": 10,
+    "name": "x100",
+    "start_number": 1,
+    "end_number": 20
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 376,
+  "fields": {
+    "raffle_list": 10,
+    "number": 1,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 46
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 377,
+  "fields": {
+    "raffle_list": 10,
+    "number": 2,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 58
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 378,
+  "fields": {
+    "raffle_list": 10,
+    "number": 3,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 58
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 379,
+  "fields": {
+    "raffle_list": 10,
+    "number": 4,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 58
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 380,
+  "fields": {
+    "raffle_list": 10,
+    "number": 5,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 58
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 381,
+  "fields": {
+    "raffle_list": 10,
+    "number": 6,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 382,
+  "fields": {
+    "raffle_list": 10,
+    "number": 7,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 78
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 383,
+  "fields": {
+    "raffle_list": 10,
+    "number": 8,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 384,
+  "fields": {
+    "raffle_list": 10,
+    "number": 9,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 385,
+  "fields": {
+    "raffle_list": 10,
+    "number": 10,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 386,
+  "fields": {
+    "raffle_list": 10,
+    "number": 11,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 387,
+  "fields": {
+    "raffle_list": 10,
+    "number": 12,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 388,
+  "fields": {
+    "raffle_list": 10,
+    "number": 13,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 389,
+  "fields": {
+    "raffle_list": 10,
+    "number": 14,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 390,
+  "fields": {
+    "raffle_list": 10,
+    "number": 15,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 35
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 391,
+  "fields": {
+    "raffle_list": 10,
+    "number": 16,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 392,
+  "fields": {
+    "raffle_list": 10,
+    "number": 17,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 393,
+  "fields": {
+    "raffle_list": 10,
+    "number": 18,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 394,
+  "fields": {
+    "raffle_list": 10,
+    "number": 19,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 395,
+  "fields": {
+    "raffle_list": 10,
+    "number": 20,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 396,
+  "fields": {
+    "raffle_list": 10,
+    "number": 21,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 397,
+  "fields": {
+    "raffle_list": 10,
+    "number": 22,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 398,
+  "fields": {
+    "raffle_list": 10,
+    "number": 23,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 399,
+  "fields": {
+    "raffle_list": 10,
+    "number": 24,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 400,
+  "fields": {
+    "raffle_list": 10,
+    "number": 25,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 401,
+  "fields": {
+    "raffle_list": 10,
+    "number": 26,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 78
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 402,
+  "fields": {
+    "raffle_list": 10,
+    "number": 27,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 403,
+  "fields": {
+    "raffle_list": 10,
+    "number": 28,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 404,
+  "fields": {
+    "raffle_list": 10,
+    "number": 29,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 405,
+  "fields": {
+    "raffle_list": 10,
+    "number": 30,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 406,
+  "fields": {
+    "raffle_list": 10,
+    "number": 31,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 407,
+  "fields": {
+    "raffle_list": 10,
+    "number": 32,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 408,
+  "fields": {
+    "raffle_list": 10,
+    "number": 33,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 36
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 409,
+  "fields": {
+    "raffle_list": 10,
+    "number": 34,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 410,
+  "fields": {
+    "raffle_list": 10,
+    "number": 35,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 411,
+  "fields": {
+    "raffle_list": 10,
+    "number": 36,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 412,
+  "fields": {
+    "raffle_list": 10,
+    "number": 37,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 36
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 413,
+  "fields": {
+    "raffle_list": 10,
+    "number": 38,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 414,
+  "fields": {
+    "raffle_list": 10,
+    "number": 39,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 415,
+  "fields": {
+    "raffle_list": 10,
+    "number": 40,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 416,
+  "fields": {
+    "raffle_list": 10,
+    "number": 41,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 417,
+  "fields": {
+    "raffle_list": 10,
+    "number": 42,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 418,
+  "fields": {
+    "raffle_list": 10,
+    "number": 43,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 78
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 419,
+  "fields": {
+    "raffle_list": 10,
+    "number": 44,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 420,
+  "fields": {
+    "raffle_list": 10,
+    "number": 45,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 36
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 421,
+  "fields": {
+    "raffle_list": 10,
+    "number": 46,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 422,
+  "fields": {
+    "raffle_list": 10,
+    "number": 47,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 423,
+  "fields": {
+    "raffle_list": 10,
+    "number": 48,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 424,
+  "fields": {
+    "raffle_list": 10,
+    "number": 49,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 425,
+  "fields": {
+    "raffle_list": 10,
+    "number": 50,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 426,
+  "fields": {
+    "raffle_list": 10,
+    "number": 51,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 427,
+  "fields": {
+    "raffle_list": 10,
+    "number": 52,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 428,
+  "fields": {
+    "raffle_list": 10,
+    "number": 53,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 78
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 429,
+  "fields": {
+    "raffle_list": 10,
+    "number": 54,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 430,
+  "fields": {
+    "raffle_list": 10,
+    "number": 55,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 431,
+  "fields": {
+    "raffle_list": 10,
+    "number": 56,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 432,
+  "fields": {
+    "raffle_list": 10,
+    "number": 57,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 433,
+  "fields": {
+    "raffle_list": 10,
+    "number": 58,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 434,
+  "fields": {
+    "raffle_list": 10,
+    "number": 59,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 435,
+  "fields": {
+    "raffle_list": 10,
+    "number": 60,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 436,
+  "fields": {
+    "raffle_list": 10,
+    "number": 61,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 437,
+  "fields": {
+    "raffle_list": 10,
+    "number": 62,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 438,
+  "fields": {
+    "raffle_list": 10,
+    "number": 63,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 439,
+  "fields": {
+    "raffle_list": 10,
+    "number": 64,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 440,
+  "fields": {
+    "raffle_list": 10,
+    "number": 65,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 441,
+  "fields": {
+    "raffle_list": 10,
+    "number": 66,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 442,
+  "fields": {
+    "raffle_list": 10,
+    "number": 67,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 443,
+  "fields": {
+    "raffle_list": 10,
+    "number": 68,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 444,
+  "fields": {
+    "raffle_list": 10,
+    "number": 69,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 445,
+  "fields": {
+    "raffle_list": 10,
+    "number": 70,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 446,
+  "fields": {
+    "raffle_list": 10,
+    "number": 71,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 447,
+  "fields": {
+    "raffle_list": 10,
+    "number": 72,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 448,
+  "fields": {
+    "raffle_list": 10,
+    "number": 73,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 449,
+  "fields": {
+    "raffle_list": 10,
+    "number": 74,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 450,
+  "fields": {
+    "raffle_list": 10,
+    "number": 75,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 451,
+  "fields": {
+    "raffle_list": 10,
+    "number": 76,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 452,
+  "fields": {
+    "raffle_list": 10,
+    "number": 77,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 453,
+  "fields": {
+    "raffle_list": 10,
+    "number": 78,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 61
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 454,
+  "fields": {
+    "raffle_list": 10,
+    "number": 79,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 61
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 455,
+  "fields": {
+    "raffle_list": 10,
+    "number": 80,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 456,
+  "fields": {
+    "raffle_list": 10,
+    "number": 81,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 457,
+  "fields": {
+    "raffle_list": 10,
+    "number": 82,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 458,
+  "fields": {
+    "raffle_list": 10,
+    "number": 83,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 459,
+  "fields": {
+    "raffle_list": 10,
+    "number": 84,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 460,
+  "fields": {
+    "raffle_list": 10,
+    "number": 85,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 461,
+  "fields": {
+    "raffle_list": 10,
+    "number": 86,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 462,
+  "fields": {
+    "raffle_list": 10,
+    "number": 87,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 463,
+  "fields": {
+    "raffle_list": 10,
+    "number": 88,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 464,
+  "fields": {
+    "raffle_list": 10,
+    "number": 89,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 465,
+  "fields": {
+    "raffle_list": 10,
+    "number": 90,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 466,
+  "fields": {
+    "raffle_list": 10,
+    "number": 91,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 467,
+  "fields": {
+    "raffle_list": 10,
+    "number": 92,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 468,
+  "fields": {
+    "raffle_list": 10,
+    "number": 93,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 469,
+  "fields": {
+    "raffle_list": 10,
+    "number": 94,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 470,
+  "fields": {
+    "raffle_list": 10,
+    "number": 95,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 471,
+  "fields": {
+    "raffle_list": 10,
+    "number": 96,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 472,
+  "fields": {
+    "raffle_list": 10,
+    "number": 97,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 473,
+  "fields": {
+    "raffle_list": 10,
+    "number": 98,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 474,
+  "fields": {
+    "raffle_list": 10,
+    "number": 99,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 475,
+  "fields": {
+    "raffle_list": 10,
+    "number": 100,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 576,
+  "fields": {
+    "raffle_list": 12,
+    "number": 1,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 37
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 577,
+  "fields": {
+    "raffle_list": 12,
+    "number": 2,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 44
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 578,
+  "fields": {
+    "raffle_list": 12,
+    "number": 3,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 44
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 579,
+  "fields": {
+    "raffle_list": 12,
+    "number": 4,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 44
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 580,
+  "fields": {
+    "raffle_list": 12,
+    "number": 5,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 44
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 581,
+  "fields": {
+    "raffle_list": 12,
+    "number": 6,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 37
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 582,
+  "fields": {
+    "raffle_list": 12,
+    "number": 7,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 42
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 583,
+  "fields": {
+    "raffle_list": 12,
+    "number": 8,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 42
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 584,
+  "fields": {
+    "raffle_list": 12,
+    "number": 9,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 42
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 585,
+  "fields": {
+    "raffle_list": 12,
+    "number": 10,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 42
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 586,
+  "fields": {
+    "raffle_list": 13,
+    "number": 1,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 587,
+  "fields": {
+    "raffle_list": 13,
+    "number": 2,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 588,
+  "fields": {
+    "raffle_list": 13,
+    "number": 3,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 589,
+  "fields": {
+    "raffle_list": 13,
+    "number": 4,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 67
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 590,
+  "fields": {
+    "raffle_list": 13,
+    "number": 5,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 67
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 591,
+  "fields": {
+    "raffle_list": 13,
+    "number": 6,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 67
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 592,
+  "fields": {
+    "raffle_list": 13,
+    "number": 7,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 593,
+  "fields": {
+    "raffle_list": 13,
+    "number": 8,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 594,
+  "fields": {
+    "raffle_list": 13,
+    "number": 9,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 65
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 595,
+  "fields": {
+    "raffle_list": 13,
+    "number": 10,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": true,
+    "purchase": 65
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 596,
+  "fields": {
+    "raffle_list": 14,
+    "number": 1,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 597,
+  "fields": {
+    "raffle_list": 14,
+    "number": 2,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 598,
+  "fields": {
+    "raffle_list": 14,
+    "number": 3,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 599,
+  "fields": {
+    "raffle_list": 14,
+    "number": 4,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 600,
+  "fields": {
+    "raffle_list": 14,
+    "number": 5,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 601,
+  "fields": {
+    "raffle_list": 14,
+    "number": 6,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 602,
+  "fields": {
+    "raffle_list": 14,
+    "number": 7,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 603,
+  "fields": {
+    "raffle_list": 14,
+    "number": 8,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 604,
+  "fields": {
+    "raffle_list": 14,
+    "number": 9,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 605,
+  "fields": {
+    "raffle_list": 14,
+    "number": 10,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 606,
+  "fields": {
+    "raffle_list": 15,
+    "number": 1,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 607,
+  "fields": {
+    "raffle_list": 15,
+    "number": 2,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 608,
+  "fields": {
+    "raffle_list": 15,
+    "number": 3,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 609,
+  "fields": {
+    "raffle_list": 15,
+    "number": 4,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 610,
+  "fields": {
+    "raffle_list": 15,
+    "number": 5,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 611,
+  "fields": {
+    "raffle_list": 15,
+    "number": 6,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 612,
+  "fields": {
+    "raffle_list": 15,
+    "number": 7,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 613,
+  "fields": {
+    "raffle_list": 15,
+    "number": 8,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 614,
+  "fields": {
+    "raffle_list": 15,
+    "number": 9,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 615,
+  "fields": {
+    "raffle_list": 15,
+    "number": 10,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 616,
+  "fields": {
+    "raffle_list": 15,
+    "number": 11,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 617,
+  "fields": {
+    "raffle_list": 15,
+    "number": 12,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 618,
+  "fields": {
+    "raffle_list": 15,
+    "number": 13,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 619,
+  "fields": {
+    "raffle_list": 15,
+    "number": 14,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 620,
+  "fields": {
+    "raffle_list": 15,
+    "number": 15,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 621,
+  "fields": {
+    "raffle_list": 15,
+    "number": 16,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 622,
+  "fields": {
+    "raffle_list": 15,
+    "number": 17,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 623,
+  "fields": {
+    "raffle_list": 15,
+    "number": 18,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 624,
+  "fields": {
+    "raffle_list": 15,
+    "number": 19,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "raffles.rafflenumber",
+  "pk": 625,
+  "fields": {
+    "raffle_list": 15,
+    "number": 20,
+    "is_reserved": false,
+    "reserved_until": null,
+    "is_sold": false,
+    "purchase": null
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 18,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-5cd77ad1-fde6-4972-8373-069c18ee6101",
+    "status": "pending",
+    "created_at": "2026-02-19T07:16:16.607Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 19,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-15f48c1c-0b8a-45f0-b750-386ee92c6b2c",
+    "status": "pending",
+    "created_at": "2026-02-19T07:20:23.571Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 20,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-72bfaa98-c7fc-40bc-8781-8b9c681473e4",
+    "status": "pending",
+    "created_at": "2026-02-19T07:21:09.136Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 21,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-4e4a0ca5-4aed-493e-90c1-3adfa7a92cf0",
+    "status": "pending",
+    "created_at": "2026-02-19T07:23:29.195Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 22,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-f15b8929-3e4c-4368-88fe-d5e3d5fda673",
+    "status": "pending",
+    "created_at": "2026-02-19T07:23:42.948Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 23,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-58430909-4f68-4383-b47a-7b19bead8094",
+    "status": "pending",
+    "created_at": "2026-02-19T07:25:49.254Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 24,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-4d89fbe8-81b4-4b69-becf-37d3d444121c",
+    "status": "pending",
+    "created_at": "2026-02-19T07:25:59.642Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 25,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-a59be58c-0253-4f11-b04c-658c1d49e288",
+    "status": "pending",
+    "created_at": "2026-02-19T17:16:54.782Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 26,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-b823a128-73bd-4799-b7da-1a9f8b0e4dbf",
+    "status": "pending",
+    "created_at": "2026-02-19T18:45:42.477Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 27,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-13b94d81-7236-4a0c-b2f8-a62847863a38",
+    "status": "pending",
+    "created_at": "2026-02-19T18:50:40.071Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 28,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-fd1bebc0-46a8-4311-a65d-872567359b75",
+    "status": "pending",
+    "created_at": "2026-02-19T18:50:48.982Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 29,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-7b0b0132-07c9-4cc2-a493-3f4838992418",
+    "status": "pending",
+    "created_at": "2026-02-19T18:57:07.718Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 30,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-c56ac034-7138-49e6-90d0-673fac33ef6d",
+    "status": "pending",
+    "created_at": "2026-02-19T18:57:24.937Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 31,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-55e73478-def5-4adb-b6eb-84d1d7c6c68e",
+    "status": "pending",
+    "created_at": "2026-02-19T18:58:52.913Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 32,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-4d39a791-6390-473e-9b6d-93809351939b",
+    "status": "pending",
+    "created_at": "2026-02-20T05:30:53.546Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 33,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-9b3dbd66-258d-4137-8f0c-61ab501ba528",
+    "status": "pending",
+    "created_at": "2026-02-20T05:31:02.714Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 34,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-a02928af-d168-4eb4-931c-c80e58a6e675",
+    "status": "pending",
+    "created_at": "2026-02-20T05:36:01.094Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 35,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-83355468-6c8d-49e5-908b-ee352b8eb85f",
+    "status": "paid",
+    "created_at": "2026-02-20T05:49:21.984Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 36,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "30.00",
+    "reference": "TIXI-4e4aec0b-f189-43d7-954d-ae7a4f9cf3eb",
+    "status": "paid",
+    "created_at": "2026-02-20T05:54:07.181Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 37,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "2.00",
+    "reference": "TIXI-2c130f46-8af9-4455-9b77-b5a94688d78a",
+    "status": "paid",
+    "created_at": "2026-02-20T06:26:12.649Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 38,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "2.00",
+    "reference": "TIXI-ab330014-21db-4195-ba0d-ec0b2bc03aaa",
+    "status": "pending",
+    "created_at": "2026-02-20T06:34:18.803Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 39,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "2.00",
+    "reference": "TIXI-1f142251-53b3-48d9-9325-df3e76aa6151",
+    "status": "pending",
+    "created_at": "2026-02-20T06:41:11.997Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 40,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "2.00",
+    "reference": "TIXI-f872e5f2-42ca-47d9-986b-293d76abc2cc",
+    "status": "pending",
+    "created_at": "2026-02-20T06:43:59.289Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 41,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "2.00",
+    "reference": "TIXI-c5ada044-3819-4da7-962d-fa2334ed72ce",
+    "status": "pending",
+    "created_at": "2026-02-20T06:44:06.992Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 42,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "4.00",
+    "reference": "TIXI-f3a518ab-d75e-49f5-9a56-2b286b857175",
+    "status": "paid",
+    "created_at": "2026-02-20T06:45:36.769Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 43,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "4.00",
+    "reference": "TIXI-d8a2132c-1ca7-4111-b483-3bf109843f4c",
+    "status": "pending",
+    "created_at": "2026-02-20T06:45:43.938Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 44,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "4.00",
+    "reference": "TIXI-ebd940e2-7736-417c-8f84-9d91ca0547a3",
+    "status": "paid",
+    "created_at": "2026-02-20T06:55:25.315Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 45,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 7,
+    "amount": "4.00",
+    "reference": "TIXI-1f2d0f3f-a3fb-4932-b6a3-bdffce9c4664",
+    "status": "pending",
+    "created_at": "2026-02-20T06:55:36.257Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 46,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-a90c5664-de00-4146-ae23-f012099556e3",
+    "status": "paid",
+    "created_at": "2026-02-20T21:04:20.685Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 47,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-541f25ae-0f97-4b90-a384-793f4886c16b",
+    "status": "pending",
+    "created_at": "2026-02-20T21:04:23.592Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 48,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-ca4e565c-6268-4a99-8300-6442f32de643",
+    "status": "pending",
+    "created_at": "2026-02-20T21:04:33.423Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 49,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-82fde0c3-9708-42a8-9b89-20ea513e17fd",
+    "status": "pending",
+    "created_at": "2026-02-20T21:04:47.743Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 50,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-ec853624-d90f-44d3-bdde-fa50cd2ff882",
+    "status": "pending",
+    "created_at": "2026-02-20T21:05:29.344Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 51,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-0c6f1aa8-f9f6-4e38-8001-62ab8685b1ae",
+    "status": "pending",
+    "created_at": "2026-02-20T21:05:46.998Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 52,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-0a386a84-9e11-453b-a744-267faa8cc490",
+    "status": "pending",
+    "created_at": "2026-02-20T21:05:53.670Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 53,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-b2002fbb-a526-43e8-9e03-23264b373662",
+    "status": "pending",
+    "created_at": "2026-02-21T14:13:00.658Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 54,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-759d7ade-36f9-4f9c-b6ef-309470f6a2fa",
+    "status": "pending",
+    "created_at": "2026-02-21T14:13:01.609Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 55,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-9d7dc5d3-23ca-44d8-929d-64537791f7d9",
+    "status": "pending",
+    "created_at": "2026-02-21T14:14:20.913Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 56,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "30.00",
+    "reference": "TIXI-5adf9cb6-8ec8-48e8-9f4f-6ce430157fb1",
+    "status": "pending",
+    "created_at": "2026-02-21T14:18:44.023Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 57,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "30.00",
+    "reference": "TIXI-a7d55155-5ee0-4609-a3c9-be8d5e555383",
+    "status": "pending",
+    "created_at": "2026-02-21T14:18:52.945Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 58,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "40.00",
+    "reference": "TIXI-0b5bb3e1-9f97-430f-94f3-9c033e16bd19",
+    "status": "paid",
+    "created_at": "2026-02-21T14:37:50.971Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 59,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "40.00",
+    "reference": "TIXI-7dbc6ae7-be76-4f2b-93ee-3090d23b07b7",
+    "status": "pending",
+    "created_at": "2026-02-21T14:38:00.912Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 60,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-2efc364c-163d-4405-865c-318b722a6fb3",
+    "status": "pending",
+    "created_at": "2026-02-21T14:40:04.014Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 61,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-59df9323-48f8-4977-9729-d556c7a663af",
+    "status": "paid",
+    "created_at": "2026-02-21T14:44:52.603Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 62,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-642df736-51ea-4273-a42e-06cffb40eb1f",
+    "status": "pending",
+    "created_at": "2026-02-21T14:44:57.350Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 63,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 8,
+    "amount": "10.00",
+    "reference": "TIXI-8a5419db-1899-407a-ad18-6b7ec91283db",
+    "status": "pending",
+    "created_at": "2026-02-21T15:41:37.205Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 64,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 8,
+    "amount": "10.00",
+    "reference": "TIXI-e53937ab-1bea-426c-a53b-21c1f0b9852b",
+    "status": "pending",
+    "created_at": "2026-02-21T15:41:38.760Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 65,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "raffle": 8,
+    "amount": "10.00",
+    "reference": "TIXI-bd366e56-0e57-432a-a3d4-fcaaa461e0cf",
+    "status": "paid",
+    "created_at": "2026-02-21T15:43:04.316Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 66,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "raffle": 8,
+    "amount": "15.00",
+    "reference": "TIXI-7ede6a72-6d41-49f6-b63c-fb159e88ed50",
+    "status": "pending",
+    "created_at": "2026-02-21T15:43:11.568Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 67,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 8,
+    "amount": "15.00",
+    "reference": "TIXI-58f11e09-3042-4698-aa00-30338cfa284a",
+    "status": "paid",
+    "created_at": "2026-02-21T15:45:05.779Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 68,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 8,
+    "amount": "15.00",
+    "reference": "TIXI-3edac003-84b3-4310-b453-059931bf5fca",
+    "status": "pending",
+    "created_at": "2026-02-21T15:45:10.830Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 69,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-042d0ace-8a64-4854-ba77-b82f1d0795b9",
+    "status": "pending",
+    "created_at": "2026-02-22T02:28:17.475Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 70,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-a53a8d6f-d18e-4089-ac08-e7cdd6781568",
+    "status": "pending",
+    "created_at": "2026-02-22T02:28:20.885Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 71,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-41b38a32-5ec1-4cb3-aea9-eebb96dbc116",
+    "status": "pending",
+    "created_at": "2026-02-22T02:32:40.461Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 72,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-7c65a8d1-aa09-4858-a162-5ab20be3aa9a",
+    "status": "pending",
+    "created_at": "2026-02-22T02:32:42.936Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 73,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-7deb463b-6074-42c3-a59b-7dd91b663549",
+    "status": "pending",
+    "created_at": "2026-02-22T03:18:27.848Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 74,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "10.00",
+    "reference": "TIXI-2abfb5e3-f146-4968-808c-664443f80be4",
+    "status": "pending",
+    "created_at": "2026-02-22T04:40:28.957Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 75,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "raffle": 9,
+    "amount": "3.00",
+    "reference": "TIXI-dd2d90c7-0005-422e-982f-b6cf4e466f3e",
+    "status": "pending",
+    "created_at": "2026-02-22T04:47:28.910Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 76,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-82c6e90f-df27-47d9-9174-e0a38f5a0be8",
+    "status": "pending",
+    "created_at": "2026-02-22T04:50:56.485Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 77,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "raffle": 9,
+    "amount": "2.00",
+    "reference": "TIXI-12da44d2-c804-42fe-84fc-c4e68a9eeb3d",
+    "status": "pending",
+    "created_at": "2026-02-22T04:53:31.210Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 78,
+  "fields": {
+    "user": [
+      "riff"
+    ],
+    "raffle": 6,
+    "amount": "40.00",
+    "reference": "TIXI-0780a022-01e9-4e85-8753-3731329c6072",
+    "status": "paid",
+    "created_at": "2026-02-22T04:56:28.875Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 79,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 9,
+    "amount": "2.00",
+    "reference": "TIXI-80cda98e-2da1-4ce8-910c-94c0fb8e6099",
+    "status": "pending",
+    "created_at": "2026-02-23T20:07:41.328Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 80,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-a93c8ebf-0cc6-4e5f-97a4-a0c8b89e2794",
+    "status": "pending",
+    "created_at": "2026-02-24T05:25:44.091Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 81,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "60.00",
+    "reference": "TIXI-9ae77401-ee16-45b2-ad23-3d2ae635deec",
+    "status": "pending",
+    "created_at": "2026-02-24T06:46:06.522Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 82,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-e41fdc15-fa2b-423b-9366-15954c00297e",
+    "status": "pending",
+    "created_at": "2026-02-24T07:11:02.574Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 83,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "30.00",
+    "reference": "TIXI-8f54e1f8-5378-4ef2-ae6f-3122d1f26186",
+    "status": "pending",
+    "created_at": "2026-02-24T07:38:08.505Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 84,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "40.00",
+    "reference": "TIXI-119ef662-60bb-4c28-be3a-c3f95ced891e",
+    "status": "pending",
+    "created_at": "2026-02-24T07:48:39.528Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 85,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "40.00",
+    "reference": "TIXI-eaca3a0f-6cf3-464b-aecd-e133c6a9b706",
+    "status": "pending",
+    "created_at": "2026-02-24T07:49:54.088Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 86,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-25a4a391-fcc9-4c01-8440-1c48b1526775",
+    "status": "pending",
+    "created_at": "2026-02-24T07:50:56.197Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 87,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-de820cd0-bbeb-4640-9307-258468463b76",
+    "status": "pending",
+    "created_at": "2026-02-24T07:53:21.955Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 88,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-94d9c374-5308-400e-be78-a9fe70862aea",
+    "status": "pending",
+    "created_at": "2026-02-24T07:54:02.541Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 89,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "60.00",
+    "reference": "TIXI-294d9889-7c64-4eab-9f40-88a87ad8f6be",
+    "status": "pending",
+    "created_at": "2026-02-24T07:56:25.238Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 90,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "60.00",
+    "reference": "TIXI-6dc07f5b-e7b0-4485-b86d-909b1a8919a4",
+    "status": "pending",
+    "created_at": "2026-02-24T07:56:54.217Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 91,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-a37d40e0-d7ed-481e-b0cb-687535678384",
+    "status": "pending",
+    "created_at": "2026-02-24T07:57:07.074Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 92,
+  "fields": {
+    "user": [
+      "jorge"
+    ],
+    "raffle": 6,
+    "amount": "30.00",
+    "reference": "TIXI-8a914f12-dd15-4585-a914-be27365b5873",
+    "status": "pending",
+    "created_at": "2026-02-24T07:57:21.486Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 93,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "20.00",
+    "reference": "TIXI-5ca6eeb8-bb7c-4a1f-b2b6-9236a810a37f",
+    "status": "pending",
+    "created_at": "2026-02-24T08:01:37.035Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 94,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 6,
+    "amount": "70.00",
+    "reference": "TIXI-c815208c-0f5b-4885-a1be-31f90db78b53",
+    "status": "pending",
+    "created_at": "2026-02-24T18:21:42.809Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 95,
+  "fields": {
+    "user": [
+      "savage"
+    ],
+    "raffle": 6,
+    "amount": "30.00",
+    "reference": "TIXI-cf242d03-16a6-4049-8d8b-24732484bfad",
+    "status": "pending",
+    "created_at": "2026-02-25T16:06:32.574Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 96,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 9,
+    "amount": "3.00",
+    "reference": "TIXI-8bda1e5b-7a54-40c0-bc44-40d14a933e78",
+    "status": "pending",
+    "created_at": "2026-02-25T17:55:40.158Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 97,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 10,
+    "amount": "4.00",
+    "reference": "TIXI-26e61ebd-7cf5-4492-9d1b-b99b92ff13ba",
+    "status": "pending",
+    "created_at": "2026-03-01T03:16:16.596Z"
+  }
+},
+{
+  "model": "payments.purchase",
+  "pk": 98,
+  "fields": {
+    "user": [
+      "admin"
+    ],
+    "raffle": 9,
+    "amount": "3.00",
+    "reference": "TIXI-adcfa181-61dd-45e1-8173-33b8d933d985",
+    "status": "pending",
+    "created_at": "2026-03-01T06:56:07.598Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 1,
+  "fields": {
+    "payload": {
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "EnlacePago": {
+        "IdentificadorEnlaceComercio": "WEBHOOK-TEST-001",
+        "Monto": 10.0,
+        "Descripcion": "Test de webhook"
+      },
+      "Transaccion": {
+        "IdTransaccion": "TEST-TX-12345",
+        "FechaTransaccion": "2026-02-16T11:57:21.731454"
+      }
+    },
+    "status": "processed",
+    "reference": "WEBHOOK-TEST-001",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-16T17:57:23.869Z",
+    "processed_at": "2026-02-16T17:57:23.869Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 2,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-19T23:51:10.10741-06:00",
+      "Monto": "10.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "d1f31df2-252c-450a-abc2-bc8eec1c7011",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "4ef5d12f-063c-47b4-a77d-28f703c732eb",
+      "IdIntentoPago": "112e3f58-2374-4bfa-b6a5-da6e59d3eb19",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3092903,
+        "IdentificadorEnlaceComercio": "TIXI-83355468-6c8d-49e5-908b-ee352b8eb85f",
+        "NombreProducto": "Γ£¿ ┬íParticipa en la gran rifa del Honor Robot Phone ≡ƒô▒",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "sdfsd",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-83355468-6c8d-49e5-908b-ee352b8eb85f",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-83355468-6c8d-49e5-908b-ee352b8eb85f",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-20T05:51:21.000Z",
+    "processed_at": "2026-02-20T05:51:21.000Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 3,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-20T00:02:50.6855829-06:00",
+      "Monto": "30.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "94f5fc7b-be74-48c3-a4f5-6c7b8463a3fc",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "0e533285-af31-4d9f-90dc-e91fe65c04a1",
+      "IdIntentoPago": "2ba4d269-76ad-4cb1-9e0f-2ab32ba6e687",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3092910,
+        "IdentificadorEnlaceComercio": "TIXI-4e4aec0b-f189-43d7-954d-ae7a4f9cf3eb",
+        "NombreProducto": "Γ£¿ ┬íParticipa en la gran rifa del Honor Robot Phone ≡ƒô▒",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "fghfgh",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-4e4aec0b-f189-43d7-954d-ae7a4f9cf3eb",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-4e4aec0b-f189-43d7-954d-ae7a4f9cf3eb",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-20T06:02:56.805Z",
+    "processed_at": "2026-02-20T06:02:56.805Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 4,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-20T00:32:58.9373775-06:00",
+      "Monto": "2.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "0aed9e19-2f11-465c-91be-c241023b5f13",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "2c8bbe08-7723-4f97-bae0-a3e5e76a8065",
+      "IdIntentoPago": "7ddc0edd-4219-4b11-bf07-7be0a4e46572",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3092959,
+        "IdentificadorEnlaceComercio": "TIXI-2c130f46-8af9-4455-9b77-b5a94688d78a",
+        "NombreProducto": "Camiseta Oficial Real Madrid ΓÇô Primera Equipaci├│n 2026/2",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "fghfgh",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-2c130f46-8af9-4455-9b77-b5a94688d78a",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-2c130f46-8af9-4455-9b77-b5a94688d78a",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-20T06:33:04.923Z",
+    "processed_at": "2026-02-20T06:33:04.922Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 5,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-20T00:46:28.6478061-06:00",
+      "Monto": "4.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "3d4a34f7-fb4b-4e34-8f83-623e7419a10d",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "4ca1d3fa-d521-4f8c-abdd-8a5ed694f750",
+      "IdIntentoPago": "6c16bba9-f70a-4f9f-87f3-dacdead84e44",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3092978,
+        "IdentificadorEnlaceComercio": "TIXI-f3a518ab-d75e-49f5-9a56-2b286b857175",
+        "NombreProducto": "Camiseta Oficial Real Madrid ΓÇô Primera Equipaci├│n 2026/2",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "sdfsd",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-f3a518ab-d75e-49f5-9a56-2b286b857175",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-f3a518ab-d75e-49f5-9a56-2b286b857175",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-20T06:46:47.403Z",
+    "processed_at": "2026-02-20T06:46:47.402Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 6,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-20T00:56:03.3796763-06:00",
+      "Monto": "4.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "b74fa0dd-6028-4c8d-8571-6fdb1209b029",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "8ad65db1-4aa8-4168-98ae-9469d8a444b2",
+      "IdIntentoPago": "a4612af8-2e94-477c-8301-37ce32e15736",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3092981,
+        "IdentificadorEnlaceComercio": "TIXI-ebd940e2-7736-417c-8f84-9d91ca0547a3",
+        "NombreProducto": "Camiseta Oficial Real Madrid ΓÇô Primera Equipaci├│n 2026/2",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "sdfsd",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-ebd940e2-7736-417c-8f84-9d91ca0547a3",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-ebd940e2-7736-417c-8f84-9d91ca0547a3",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-20T06:56:16.239Z",
+    "processed_at": "2026-02-20T06:56:16.226Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 7,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-20T15:05:16.4656156-06:00",
+      "Monto": "10.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "524b5054-4754-47b4-b21a-71841f7e7bd1",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "6b430f5d-32f8-4aab-a6a2-ac7d498922f7",
+      "IdIntentoPago": "6de5ec42-f76f-4f78-870f-c72469c68da5",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3096183,
+        "IdentificadorEnlaceComercio": "TIXI-a90c5664-de00-4146-ae23-f012099556e3",
+        "NombreProducto": "Γ£¿ ┬íParticipa en la gran rifa del Honor Robot Phone ≡ƒô▒",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "Jorge De Paz",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-a90c5664-de00-4146-ae23-f012099556e3",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-a90c5664-de00-4146-ae23-f012099556e3",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-20T21:05:38.452Z",
+    "processed_at": "2026-02-20T21:05:38.451Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 8,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-21T08:38:41.1793558-06:00",
+      "Monto": "40.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "1124edbc-bc61-4d94-a9f9-a627d2a6740b",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "523826f2-b171-4c8c-ae8c-8c0519992a3e",
+      "IdIntentoPago": "9cf52b9e-5dc2-453c-be13-024f68050d9d",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3099168,
+        "IdentificadorEnlaceComercio": "TIXI-0b5bb3e1-9f97-430f-94f3-9c033e16bd19",
+        "NombreProducto": "Γ£¿ ┬íParticipa en la gran rifa del Honor Robot Phone ≡ƒô▒",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "Jorge De Paz",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-0b5bb3e1-9f97-430f-94f3-9c033e16bd19",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-0b5bb3e1-9f97-430f-94f3-9c033e16bd19",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-21T14:38:47.999Z",
+    "processed_at": "2026-02-21T14:38:47.998Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 9,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-21T08:46:02.443837-06:00",
+      "Monto": "20.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "540a1d24-32f2-444d-8702-08c727380ab0",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "2e2cef0f-3e3d-4051-a6e1-02d565374e22",
+      "IdIntentoPago": "9716a0f5-7c40-4e1d-b8c8-2ec5a3cc7f65",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3099208,
+        "IdentificadorEnlaceComercio": "TIXI-59df9323-48f8-4977-9729-d556c7a663af",
+        "NombreProducto": "Γ£¿ ┬íParticipa en la gran rifa del Honor Robot Phone ≡ƒô▒",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "sdfsd",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-59df9323-48f8-4977-9729-d556c7a663af",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-59df9323-48f8-4977-9729-d556c7a663af",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-21T14:46:12.672Z",
+    "processed_at": "2026-02-21T14:46:12.672Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 10,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-21T09:43:41.4749492-06:00",
+      "Monto": "10.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "3af1dfb1-6a32-47f0-bd12-962237549b7e",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "7ebad8a2-04b2-45a3-8cea-9b154d777dc7",
+      "IdIntentoPago": "ebf13f53-4095-484e-ba2d-9b6f5a5cfb04",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3099481,
+        "IdentificadorEnlaceComercio": "TIXI-bd366e56-0e57-432a-a3d4-fcaaa461e0cf",
+        "NombreProducto": "JULI├ôN ├üLVAREZ EN CONCIERTO ΓÇô 24 DE ABRIL",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "sdfsd",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-bd366e56-0e57-432a-a3d4-fcaaa461e0cf",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-bd366e56-0e57-432a-a3d4-fcaaa461e0cf",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-21T15:43:52.143Z",
+    "processed_at": "2026-02-21T15:43:52.142Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 11,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-21T09:45:43.8168586-06:00",
+      "Monto": "15.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "2e18538c-6d8d-4008-a5b7-ac305958c99a",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "a23697b3-1fb3-4ebb-8665-b1683cde3c0c",
+      "IdIntentoPago": "58596ba1-de57-4427-bbdf-6808c66ccf7b",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3099497,
+        "IdentificadorEnlaceComercio": "TIXI-58f11e09-3042-4698-aa00-30338cfa284a",
+        "NombreProducto": "JULI├ôN ├üLVAREZ EN CONCIERTO ΓÇô 24 DE ABRIL",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "Jorge De Paz",
+        "EMail": "jorgejr728@yahoo.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-58f11e09-3042-4698-aa00-30338cfa284a",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-58f11e09-3042-4698-aa00-30338cfa284a",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-21T15:45:59.531Z",
+    "processed_at": "2026-02-21T15:45:59.529Z"
+  }
+},
+{
+  "model": "payments.webhooklog",
+  "pk": 12,
+  "fields": {
+    "payload": {
+      "IdCuenta": "af0ed29a-e6fc-40dc-bf69-873cf1d1483d",
+      "FechaTransaccion": "2026-02-21T22:57:14.4463226-06:00",
+      "Monto": "40.00",
+      "ModuloUtilizado": "BotonPago",
+      "FormaPagoUtilizada": "PagoNormal",
+      "IdTransaccion": "2e50f6fd-e5c9-4589-aea9-3df837918a2d",
+      "ResultadoTransaccion": "ExitosaAprobada",
+      "CodigoAutorizacion": "5555b8d0-239f-4e26-859f-3261841552f1",
+      "IdIntentoPago": "67b61bb2-d9e7-4692-bd37-75b322d51977",
+      "CantidadCuotas": null,
+      "Cantidad": 1,
+      "EsProductiva": false,
+      "Aplicativo": {
+        "Nombre": "Tixi",
+        "Url": null,
+        "Id": "cad51451-9f33-4e35-abc5-a212edc4a020"
+      },
+      "EnlacePago": {
+        "Id": 3103687,
+        "IdentificadorEnlaceComercio": "TIXI-0780a022-01e9-4e85-8753-3731329c6072",
+        "NombreProducto": "Γ£¿ ┬íParticipa en la gran rifa del Honor Robot Phone ≡ƒô▒",
+        "DescripcionProducto": null
+      },
+      "Cliente": {
+        "Nombre": "jdfgdf",
+        "EMail": "liamson789@gmail.com"
+      },
+      "Tarjeta": "0000 0000 0000 0000 ",
+      "EsInternacional": true,
+      "IdExterno": "TIXI-0780a022-01e9-4e85-8753-3731329c6072",
+      "IdGrupoTarjetas": null
+    },
+    "status": "processed",
+    "reference": "TIXI-0780a022-01e9-4e85-8753-3731329c6072",
+    "resultado_transaccion": "ExitosaAprobada",
+    "signature_valid": true,
+    "error_message": null,
+    "received_at": "2026-02-22T04:57:18.566Z",
+    "processed_at": "2026-02-22T04:57:18.566Z"
+  }
+},
+{
+  "model": "draws.draw",
+  "pk": 1,
+  "fields": {
+    "raffle": 7,
+    "seed": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "winner_number": 3,
+    "winner_comment": "",
+    "winner_comment_enabled": false,
+    "executed_at": "2026-02-20T07:02:27.668Z"
+  }
+},
+{
+  "model": "draws.draw",
+  "pk": 2,
+  "fields": {
+    "raffle": 7,
+    "seed": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "winner_number": 3,
+    "winner_comment": "Recibi el premio tal como fue ofertado en la rifa. Estoy muy feliz con haber participado y ganado.",
+    "winner_comment_enabled": true,
+    "executed_at": "2026-02-20T07:02:59.017Z"
+  }
+},
+{
+  "model": "draws.draw",
+  "pk": 3,
+  "fields": {
+    "raffle": 8,
+    "seed": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+    "winner_number": 10,
+    "winner_comment": "",
+    "winner_comment_enabled": false,
+    "executed_at": "2026-02-22T01:37:56.690Z"
+  }
+}
+]
