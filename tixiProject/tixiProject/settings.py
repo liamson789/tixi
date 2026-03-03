@@ -63,22 +63,25 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = config('ACCOUNT_EMAIL_VERIFICATION', default='none')
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = config('ACCOUNT_DEFAULT_HTTP_PROTOCOL', default='http')
 LOGIN_REDIRECT_URL = '/'
-ACCOUNT_LOGIN_BY_CODE_ENABLED = True
-ACCOUNT_LOGIN_BY_CODE_REQUIRED = True
+SOCIALACCOUNT_ONLY = config('SOCIALACCOUNT_ONLY', default=True, cast=bool)
+if SOCIALACCOUNT_ONLY:
+    ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_LOGIN_BY_CODE_ENABLED = config('ACCOUNT_LOGIN_BY_CODE_ENABLED', default=False, cast=bool)
+ACCOUNT_LOGIN_BY_CODE_REQUIRED = config('ACCOUNT_LOGIN_BY_CODE_REQUIRED', default=False, cast=bool)
 ACCOUNT_LOGIN_BY_CODE_TIMEOUT = config('ACCOUNT_LOGIN_BY_CODE_TIMEOUT', default=180, cast=int)
 ACCOUNT_LOGIN_BY_CODE_MAX_ATTEMPTS = config('ACCOUNT_LOGIN_BY_CODE_MAX_ATTEMPTS', default=3, cast=int)
 
 EMAIL_BACKEND = config(
     'EMAIL_BACKEND',
-    default='django.core.mail.backends.console.EmailBackend' if DEBUG else 'django.core.mail.backends.smtp.EmailBackend'
+    default='django.core.mail.backends.console.EmailBackend'
 )
-EMAIL_HOST = config('EMAIL_HOST', default='localhost')
-EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
+EMAIL_HOST = config('EMAIL_HOST', default='')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
@@ -230,6 +233,20 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'allauth': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'ERROR',
     },
 }
 
@@ -274,8 +291,12 @@ else:
         },
     }
 
-GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID', default='')
-GOOGLE_CLIENT_SECRET = config('GOOGLE_CLIENT_SECRET', default='')
+def _clean_env(value):
+    return (value or '').strip().strip('"').strip("'")
+
+
+GOOGLE_CLIENT_ID = _clean_env(config('GOOGLE_CLIENT_ID', default=''))
+GOOGLE_CLIENT_SECRET = _clean_env(config('GOOGLE_CLIENT_SECRET', default=''))
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
