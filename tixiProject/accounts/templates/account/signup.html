@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load socialaccount static %}
+{% load static %}
 
 {% block title %}Crear cuenta - TixiPWA{% endblock %}
 
@@ -54,57 +54,18 @@
       <div class="auth-brand">
         <img src="{% static 'accounts/auth-logo.jpeg' %}" alt="Logo TixiPWA" class="auth-logo">
         <h2 class="h3 mb-2">Crear cuenta</h2>
-        <p class="text-muted mb-4">Regístrate con tus datos o continúa con Google.</p>
+        <p class="text-muted mb-4">Regístrate de forma segura con tu cuenta de Google.</p>
       </div>
 
       {% if redirect_field_value %}
-        <a href="{% provider_login_url 'google' process='login' next=redirect_field_value %}" class="btn btn-outline-dark w-100 mb-3">
+        <a href="/accounts/google/login/?process=login&next={{ redirect_field_value|urlencode }}" class="btn btn-outline-dark w-100 mb-3">
           <span aria-hidden="true">🟢</span> Continuar con Google
         </a>
       {% else %}
-        <a href="{% provider_login_url 'google' process='login' %}" class="btn btn-outline-dark w-100 mb-3">
+        <a href="/accounts/google/login/?process=login" class="btn btn-outline-dark w-100 mb-3">
           <span aria-hidden="true">🟢</span> Continuar con Google
         </a>
       {% endif %}
-
-      <div class="auth-divider mb-3">o crea tu cuenta</div>
-
-      <form method="post" action="{% url 'account_signup' %}" novalidate>
-        {% csrf_token %}
-        {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
-        {% endif %}
-
-        {% if form.non_field_errors %}
-          <div class="alert alert-success" role="alert">
-            {% for error in form.non_field_errors %}
-              <div>{{ error }}</div>
-            {% endfor %}
-          </div>
-        {% endif %}
-
-        {% for field in form %}
-          <div class="mb-3">
-            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-            <input
-              type="{% if field.name == 'password1' or field.name == 'password2' %}password{% elif field.field.widget.input_type %}{{ field.field.widget.input_type }}{% else %}text{% endif %}"
-              name="{{ field.html_name }}"
-              id="{{ field.id_for_label }}"
-              class="form-control{% if field.errors %} is-invalid{% endif %}"
-              value="{% if field.value and field.name != 'password1' and field.name != 'password2' %}{{ field.value }}{% endif %}"
-              {% if field.field.required %}required{% endif %}
-            >
-            {% if field.help_text %}
-              <div class="form-text">{{ field.help_text|safe }}</div>
-            {% endif %}
-            {% for error in field.errors %}
-              <div class="invalid-feedback d-block">{{ error }}</div>
-            {% endfor %}
-          </div>
-        {% endfor %}
-
-        <button type="submit" class="btn btn-primary w-100">Crear cuenta</button>
-      </form>
 
       <div class="text-center mt-4">
         {% if redirect_field_value %}
@@ -113,6 +74,8 @@
           <a href="{% url 'account_login' %}">Ya tengo cuenta</a>
         {% endif %}
       </div>
+
+      <p class="text-muted small text-center mt-3 mb-0">No usamos registro local con contraseña.</p>
     </div>
   </div>
 </section>
