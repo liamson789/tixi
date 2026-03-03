@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 from accounts.views import profile_view
 from payments.webhooks import wompi_webhook
 from payments.views import payment_return, payment_status
@@ -25,6 +26,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/password/reset/', RedirectView.as_view(pattern_name='account_login', permanent=False), name='account_reset_password'),
     path('accounts/profile/', profile_view, name='user_profile'),
     path('accounts/', include('allauth.urls')),
     path('', include('raffles.urls')),
