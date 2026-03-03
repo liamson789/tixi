@@ -23,9 +23,12 @@ def _google_profile_data(user):
         family_name = extra_data.get('family_name', '')
         full_name = f"{given_name} {family_name}".strip()
 
+    normalized_full_name = (full_name or '')[:255]
+    normalized_avatar_url = (extra_data.get('picture', '') or '')[:200]
+
     return {
-        'full_name': full_name or '',
-        'avatar_url': extra_data.get('picture', '') or '',
+        'full_name': normalized_full_name,
+        'avatar_url': normalized_avatar_url,
         'auth_provider': 'google',
     }
 
