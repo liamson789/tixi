@@ -89,7 +89,8 @@ def wompi_webhook(request):
     
     try:
         # 1️⃣ Validar Content-Type
-        if request.content_type != 'application/json':
+        content_type = (request.content_type or '').lower()
+        if not content_type.startswith('application/json'):
             webhook_log.status = 'invalid_json'
             webhook_log.error_message = f"Content-Type inválido: {request.content_type}"
             webhook_log.save()
@@ -161,9 +162,16 @@ def wompi_webhook(request):
         from raffles.services import finalize_raffle_numbers, release_reserved_numbers
         
         if resultado == "ExitosaAprobada":
+            if purchase.status == "paid":
+                webhook_log.status = 'processed'
+                webhook_log.processed_at = timezone.now()
+                webhook_log.save()
+                logger.info(f"ℹ️ Webhook duplicado ignorado (ya paid): {reference}")
+                return JsonResponse({'status': 'ok'}, status=200)
+
             logger.info(f"✅ Pago APROBADO: {reference}")
             purchase.status = "paid"
-            purchase.save()
+            purchase.save(update_fields=['status'])
             
             try:
                 finalize_raffle_numbers(purchase)
@@ -178,9 +186,24 @@ def wompi_webhook(request):
             webhook_log.status = 'processed'
         
         else:
+            if purchase.status == "paid":
+                webhook_log.status = 'processed'
+                webhook_log.processed_at = timezone.now()
+                webhook_log.error_message = f"Se ignoró downgrade de paid a {resultado}"
+                webhook_log.save()
+                logger.warning(f"⚠️ Webhook ignorado para compra ya pagada: {reference} ({resultado})")
+                return JsonResponse({'status': 'ok'}, status=200)
+
+            if purchase.status == "failed":
+                webhook_log.status = 'processed'
+                webhook_log.processed_at = timezone.now()
+                webhook_log.save()
+                logger.info(f"ℹ️ Webhook duplicado ignorado (ya failed): {reference}")
+                return JsonResponse({'status': 'ok'}, status=200)
+
             logger.warning(f"❌ Pago RECHAZADO/PENDIENTE: {reference} - {resultado}")
             purchase.status = "failed"
-            purchase.save()
+            purchase.save(update_fields=['status'])
             
             try:
                 release_reserved_numbers(purchase)

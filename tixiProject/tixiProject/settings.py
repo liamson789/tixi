@@ -14,6 +14,7 @@ from pathlib import Path
 import re
 import dj_database_url
 from decouple import Csv, config
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +30,7 @@ SECRET_KEY = config(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 APPEND_SLASH = True
 # Application definition
@@ -69,7 +70,7 @@ LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_VERIFICATION = config('ACCOUNT_EMAIL_VERIFICATION', default='none')
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = config('ACCOUNT_DEFAULT_HTTP_PROTOCOL', default='http')
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = config('ACCOUNT_DEFAULT_HTTP_PROTOCOL', default='https')
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_ONLY = config('SOCIALACCOUNT_ONLY', default=False, cast=bool)
 if SOCIALACCOUNT_ONLY:
@@ -142,11 +143,20 @@ if DATABASE_URL:
             "DATABASE_URL inválida. Usa formato completo, por ejemplo: "
             "postgresql://USER:PASSWORD@HOST:PORT/DBNAME?sslmode=require"
         )
+
+    db_scheme = DATABASE_URL.split('://', 1)[0].lower()
+    ssl_supported_schemes = {'postgres', 'postgresql', 'mysql', 'mysql2'}
+    ssl_require = (
+        config('DATABASE_SSL_REQUIRE', default=True, cast=bool)
+        if db_scheme in ssl_supported_schemes
+        else False
+    )
+
     DATABASES = {
         'default': dj_database_url.parse(
             DATABASE_URL,
             conn_max_age=600,
-            ssl_require=config('DATABASE_SSL_REQUIRE', default=True, cast=bool),
+            ssl_require=ssl_require,
         )
     }
 else:
@@ -156,6 +166,12 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+if not DEBUG:
+    if not SECRET_KEY or SECRET_KEY.startswith('django-insecure-'):
+        raise ImproperlyConfigured('SECRET_KEY segura es requerida en producción')
+    if not DATABASE_URL:
+        raise ImproperlyConfigured('DATABASE_URL es requerida cuando DEBUG=False')
 
 
 # Password validation
@@ -327,6 +343,12 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=True, cast=bool)
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = config('SECURE_HSTS_SECONDS', default=31536000, cast=int)
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = config('SECURE_HSTS_INCLUDE_SUBDOMAINS', default=True, cast=bool)
+    SECURE_HSTS_PRELOAD = config('SECURE_HSTS_PRELOAD', default=True, cast=bool)
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_REFERRER_POLICY = config('SECURE_REFERRER_POLICY', default='same-origin')
+    X_FRAME_OPTIONS = config('X_FRAME_OPTIONS', default='DENY')
 
 REDIS_URL = config('REDIS_URL', default='')
 
@@ -370,10 +392,4 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
-
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = config('ACCOUNT_DEFAULT_HTTP_PROTOCOL', default='http')
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+APP_BASE_URL = config('APP_BASE_URL', default='').strip().rstrip('/')

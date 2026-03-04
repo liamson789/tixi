@@ -3,9 +3,14 @@ import uuid
 from django.conf import settings
 from django.http import JsonResponse
 from urllib.parse import urlencode
+from decimal import Decimal, InvalidOperation
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .models import Purchase
 
 
+@login_required
+@require_POST
 def create_checkout(request):
     """
     Crea un nuevo checkout de Wompi.
@@ -24,14 +29,28 @@ def create_checkout(request):
     if not raffle_id or not amount:
         return JsonResponse({'error': 'Missing raffle_id or amount'}, status=400)
 
+    try:
+        normalized_amount = Decimal(str(amount))
+    except (InvalidOperation, ValueError):
+        return JsonResponse({'error': 'Invalid amount'}, status=400)
+
+    if normalized_amount <= 0:
+        return JsonResponse({'error': 'Amount must be greater than zero'}, status=400)
+
     reference = f"TIXI-{uuid.uuid4()}"
 
     purchase = Purchase.objects.create(
         user=user,
         raffle_id=raffle_id,
-        amount=amount,
+        amount=normalized_amount,
         reference=reference
     )
+
+    base_url = getattr(settings, 'APP_BASE_URL', '') or getattr(settings, 'NGROK_URL', '')
+    if not base_url:
+        purchase.status = 'failed'
+        purchase.save(update_fields=['status'])
+        return JsonResponse({'error': 'APP_BASE_URL is not configured'}, status=500)
 
     redirect_params = urlencode({
         'reference': reference,
@@ -42,9 +61,9 @@ def create_checkout(request):
         "https://checkout.wompi.sv/p/"
         f"{settings.WOMPI_PUBLIC_KEY}"
         f"?reference={reference}"
-        f"&amount-in-cents={int(float(amount)*100)}"
+        f"&amount-in-cents={int(normalized_amount * 100)}"
         f"&currency=USD"
-        f"&redirect-url={settings.NGROK_URL}/payment/return?{redirect_params}"
+        f"&redirect-url={base_url}/payment/return?{redirect_params}"
     )
 
     return JsonResponse({"checkout_url": checkout_url})
