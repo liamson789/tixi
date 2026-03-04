@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import re
+import sys
 import dj_database_url
 from decouple import Csv, config
 from django.core.exceptions import ImproperlyConfigured
@@ -168,10 +169,14 @@ else:
     }
 
 if not DEBUG:
-    if not SECRET_KEY or SECRET_KEY.startswith('django-insecure-'):
-        raise ImproperlyConfigured('SECRET_KEY segura es requerida en producción')
-    if not DATABASE_URL:
-        raise ImproperlyConfigured('DATABASE_URL es requerida cuando DEBUG=False')
+    current_management_command = sys.argv[1] if len(sys.argv) > 1 else ''
+    skip_strict_prod_validation = current_management_command == 'collectstatic'
+
+    if not skip_strict_prod_validation:
+        if not SECRET_KEY or SECRET_KEY.startswith('django-insecure-'):
+            raise ImproperlyConfigured('SECRET_KEY segura es requerida en producción')
+        if not DATABASE_URL:
+            raise ImproperlyConfigured('DATABASE_URL es requerida cuando DEBUG=False')
 
 
 # Password validation
