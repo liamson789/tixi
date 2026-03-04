@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import re
 import dj_database_url
 from decouple import Csv, config
 
@@ -200,10 +201,25 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media files (User uploads)
 USE_DO_SPACES = config('USE_DO_SPACES', default=False, cast=bool)
 
+
+def _is_valid_bucket_name(bucket_name):
+    if not bucket_name:
+        return False
+    bucket_name = bucket_name.strip()
+    pattern = r'^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$'
+    return bool(re.match(pattern, bucket_name))
+
+
+DO_SPACES_BUCKET = config('DO_SPACES_BUCKET', default='').strip()
+DO_SPACES_KEY = config('DO_SPACES_KEY', default='').strip()
+DO_SPACES_SECRET = config('DO_SPACES_SECRET', default='').strip()
+
+USE_DO_SPACES = USE_DO_SPACES and _is_valid_bucket_name(DO_SPACES_BUCKET) and bool(DO_SPACES_KEY) and bool(DO_SPACES_SECRET)
+
 if USE_DO_SPACES:
-    AWS_ACCESS_KEY_ID = config('DO_SPACES_KEY')
-    AWS_SECRET_ACCESS_KEY = config('DO_SPACES_SECRET')
-    AWS_STORAGE_BUCKET_NAME = config('DO_SPACES_BUCKET')
+    AWS_ACCESS_KEY_ID = DO_SPACES_KEY
+    AWS_SECRET_ACCESS_KEY = DO_SPACES_SECRET
+    AWS_STORAGE_BUCKET_NAME = DO_SPACES_BUCKET
     AWS_S3_REGION_NAME = config('DO_SPACES_REGION', default='nyc3')
     AWS_S3_ENDPOINT_URL = config(
         'DO_SPACES_ENDPOINT_URL',
