@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'draws',
     'dashboard',
     'channels',
+
+    'django_unicorn',
 ]
 
 SITE_ID = 1
@@ -64,11 +66,11 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 ACCOUNT_EMAIL_VERIFICATION = config('ACCOUNT_EMAIL_VERIFICATION', default='none')
-ACCOUNT_LOGIN_METHODS = {'email', 'username'}
+ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = config('ACCOUNT_DEFAULT_HTTP_PROTOCOL', default='http')
 LOGIN_REDIRECT_URL = '/'
-SOCIALACCOUNT_ONLY = config('SOCIALACCOUNT_ONLY', default=True, cast=bool)
+SOCIALACCOUNT_ONLY = config('SOCIALACCOUNT_ONLY', default=False, cast=bool)
 if SOCIALACCOUNT_ONLY:
     ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_LOGIN_BY_CODE_ENABLED = config('ACCOUNT_LOGIN_BY_CODE_ENABLED', default=False, cast=bool)
@@ -198,6 +200,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media files (User uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+SERVE_MEDIA = config('SERVE_MEDIA', default=DEBUG, cast=bool)
 
 # 🔐 Configuración de Wompi para webhooks
 # ========================================
@@ -309,3 +312,16 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = config('ACCOUNT_DEFAULT_HTTP_PROTOCOL', default='http')
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'

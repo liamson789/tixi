@@ -24,6 +24,13 @@ def _mask_buyer_name(user):
     return f"{base_name[0]}{'*' * (len(base_name) - 2)}{base_name[-1]}"
 
 
+def _safe_file_url(file_field):
+    try:
+        return file_field.url if file_field else ''
+    except Exception:
+        return ''
+
+
 def home(request):
     status_filter = request.GET.get('status', 'active')
 
@@ -60,22 +67,24 @@ def home(request):
 
     slides = HomeCarouselSlide.objects.filter(is_active=True).order_by('display_order', '-created_at')[:8]
     for slide in slides:
-        if slide.image:
+        image_url = _safe_file_url(slide.image)
+        if image_url:
             carousel_items.append({
                 'title': slide.title,
                 'subtitle': slide.subtitle,
-                'image_url': slide.image.url,
+                'image_url': image_url,
                 'target_url': slide.link_url or '#',
             })
 
     if not carousel_items:
         for raffle in featured_qs:
             cover = raffle.media.filter(media_type='image').first()
-            if cover and cover.file:
+            cover_url = _safe_file_url(getattr(cover, 'file', None))
+            if cover_url:
                 carousel_items.append({
                     'title': raffle.title,
                     'subtitle': f"Sorteo: {raffle.draw_date.strftime('%d/%m/%Y %H:%M')}",
-                    'image_url': cover.file.url,
+                    'image_url': cover_url,
                     'target_url': reverse('raffle_detail', args=[raffle.id]),
                 })
             if len(carousel_items) >= 5:

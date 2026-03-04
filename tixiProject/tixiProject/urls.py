@@ -40,4 +40,6 @@ urlpatterns = [
 # Servir archivos de media en desarrollo
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
+
+if settings.DEBUG or getattr(settings, 'SERVE_MEDIA', False):
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

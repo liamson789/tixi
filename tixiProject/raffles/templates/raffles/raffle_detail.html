@@ -1,4 +1,5 @@
 {% extends "raffles/base.html" %}
+{% load media_utils %}
 {% block extra_css %}
 {{ block.super }}
 <style>
@@ -131,15 +132,19 @@
       {% if raffle_images %}
       <div class="row g-3 mb-3">
         {% for media in raffle_images %}
+        {% with media_url=media.file|safe_file_url %}
+        {% if media_url %}
         <div class="col-12 col-sm-6 col-lg-4">
           <img
-            src="{{ media.file.url }}"
+            src="{{ media_url }}"
             alt="Imagen de la rifa {{ raffle.title }}"
             class="img-fluid rounded border w-100"
             style="height: 220px; object-fit: cover;"
             loading="lazy"
           >
         </div>
+        {% endif %}
+        {% endwith %}
         {% endfor %}
       </div>
       {% endif %}
@@ -312,7 +317,8 @@ const clearSelectionBtn = document.getElementById("clear-selection-btn");
 const clearSelectionFeedback = document.getElementById("clear-selection-feedback");
 const isAuthenticated = "{{ request.user.is_authenticated|yesno:'true,false' }}" === "true";
 const canParticipate = "{{ can_participate|yesno:'true,false' }}" === "true";
-const loginUrl = "{% url 'account_login' %}";
+{% url 'account_login' as account_login_url %}
+const loginUrl = "{{ account_login_url|default:'/accounts/login/' }}";
 const homeUrl = "{% url 'home' %}";
 const reservationCountdownContainer = document.getElementById("reservation-countdown-container");
 const reservationCountdownText = document.getElementById("reservation-countdown");
