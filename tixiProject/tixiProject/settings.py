@@ -198,9 +198,45 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files (User uploads)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-SERVE_MEDIA = config('SERVE_MEDIA', default=DEBUG, cast=bool)
+USE_DO_SPACES = config('USE_DO_SPACES', default=False, cast=bool)
+
+if USE_DO_SPACES:
+    AWS_ACCESS_KEY_ID = config('DO_SPACES_KEY')
+    AWS_SECRET_ACCESS_KEY = config('DO_SPACES_SECRET')
+    AWS_STORAGE_BUCKET_NAME = config('DO_SPACES_BUCKET')
+    AWS_S3_REGION_NAME = config('DO_SPACES_REGION', default='nyc3')
+    AWS_S3_ENDPOINT_URL = config(
+        'DO_SPACES_ENDPOINT_URL',
+        default=f'https://{AWS_S3_REGION_NAME}.digitaloceanspaces.com'
+    )
+    AWS_S3_CUSTOM_DOMAIN = config(
+        'DO_SPACES_CDN_DOMAIN',
+        default=f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.digitaloceanspaces.com'
+    )
+    AWS_DEFAULT_ACL = None
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_LOCATION = config('DO_SPACES_LOCATION', default='media')
+
+    STORAGES = {
+        'default': {
+            'BACKEND': 'storages.backends.s3.S3Storage',
+            'OPTIONS': {
+                'location': AWS_LOCATION,
+            },
+        },
+        'staticfiles': {
+            'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        },
+    }
+
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+    SERVE_MEDIA = False
+else:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+    SERVE_MEDIA = config('SERVE_MEDIA', default=DEBUG, cast=bool)
 
 # 🔐 Configuración de Wompi para webhooks
 # ========================================
