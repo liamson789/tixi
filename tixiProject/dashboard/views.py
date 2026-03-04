@@ -18,6 +18,13 @@ def _mask_buyer_name(user):
     return f"{base_name[0]}{'*' * (len(base_name) - 2)}{base_name[-1]}"
 
 
+def _safe_file_url(file_field):
+    try:
+        return file_field.url if file_field else ''
+    except Exception:
+        return ''
+
+
 def _get_draw_winner_detail(draw):
     winner_number = RaffleNumber.objects.filter(
         raffle_list__raffle_id=draw.raffle_id,
@@ -441,7 +448,7 @@ def dashboard_home(request):
 
     for raffle in raffles:
         first_image = raffle.media.filter(media_type='image').first()
-        image_url = first_image.file.url if first_image and first_image.file else None
+        image_url = _safe_file_url(getattr(first_image, 'file', None)) or None
 
         total_numbers = RaffleNumber.objects.filter(
             raffle_list__raffle=raffle

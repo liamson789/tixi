@@ -1,4 +1,5 @@
 {% extends 'dashboard/base.html' %}
+{% load media_utils %}
 
 {% block title %}{% if is_edit %}Editar{% else %}Crear{% endif %} Rifa{% endblock %}
 
@@ -165,14 +166,23 @@
                     <h6 class="mb-3">Archivos actuales</h6>
                     <div class="row g-3">
                         {% for media in raffle.media.all %}
+                            {% with media_url=media.file|safe_file_url %}
                             <div class="col-md-4">
                                 <div class="card h-100 media-card">
                                     {% if media.media_type == 'image' %}
-                                        <img src="{{ media.file.url }}" class="card-img-top" alt="Imagen de la rifa" style="height: 180px; object-fit: cover;">
+                                        {% if media_url %}
+                                            <img src="{{ media_url }}" class="card-img-top" alt="Imagen de la rifa" style="height: 180px; object-fit: cover;">
+                                        {% else %}
+                                            <div class="card-body text-muted">Archivo no disponible</div>
+                                        {% endif %}
                                     {% else %}
-                                        <video class="card-img-top" style="height: 180px; object-fit: cover;" controls>
-                                            <source src="{{ media.file.url }}">
-                                        </video>
+                                        {% if media_url %}
+                                            <video class="card-img-top" style="height: 180px; object-fit: cover;" controls>
+                                                <source src="{{ media_url }}">
+                                            </video>
+                                        {% else %}
+                                            <div class="card-body text-muted">Archivo no disponible</div>
+                                        {% endif %}
                                     {% endif %}
                                     <div class="card-body p-2">
                                         <small class="text-muted d-block text-truncate">{{ media.file.name }}</small>
@@ -188,6 +198,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {% endwith %}
                         {% endfor %}
                     </div>
                 {% endif %}
