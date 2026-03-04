@@ -15,6 +15,7 @@ from django.views.decorators.http import require_POST
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from .services import release_expired_reservations
+from accounts.models import UserProfile
 
 
 def _mask_buyer_name(user):
@@ -27,6 +28,13 @@ def _mask_buyer_name(user):
 def _safe_file_url(file_field):
     try:
         return file_field.url if file_field else ''
+    except Exception:
+        return ''
+
+
+def _safe_avatar_url(user_id):
+    try:
+        return UserProfile.objects.filter(user_id=user_id).values_list('avatar_url', flat=True).first() or ''
     except Exception:
         return ''
 
@@ -112,7 +120,7 @@ def winners(request):
             number=draw.winner_number,
             is_sold=True,
             purchase__isnull=False,
-        ).select_related('purchase__user', 'purchase__user__profile').first()
+        ).select_related('purchase__user').first()
 
         buyer_alias = 'Usuario verificado'
         winner_name = 'Usuario verificado'
@@ -122,7 +130,7 @@ def winners(request):
             buyer = winner_number.purchase.user
             buyer_alias = _mask_buyer_name(buyer)
             winner_name = buyer.get_full_name().strip() or buyer.username or 'Usuario verificado'
-            winner_avatar_url = getattr(getattr(buyer, 'profile', None), 'avatar_url', '') or ''
+            winner_avatar_url = _safe_avatar_url(buyer.id)
 
         cleaned_comment = (draw.winner_comment or '').strip()
 
@@ -258,7 +266,7 @@ def raffle_detail(request, raffle_id):
             number=latest_draw.winner_number,
             is_sold=True,
             purchase__isnull=False,
-        ).select_related('purchase__user', 'purchase__user__profile').first()
+        ).select_related('purchase__user').first()
 
         buyer_alias = 'Usuario verificado'
         winner_name = 'Usuario verificado'
@@ -267,7 +275,7 @@ def raffle_detail(request, raffle_id):
             buyer = winner_number.purchase.user
             buyer_alias = _mask_buyer_name(buyer)
             winner_name = buyer.get_full_name().strip() or buyer.username or 'Usuario verificado'
-            winner_avatar_url = getattr(getattr(buyer, 'profile', None), 'avatar_url', '') or ''
+            winner_avatar_url = _safe_avatar_url(buyer.id)
             can_comment_as_winner = request.user.is_authenticated and buyer.id == request.user.id
 
         winner_comment_value = latest_draw.winner_comment

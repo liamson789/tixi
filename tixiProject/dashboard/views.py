@@ -25,13 +25,20 @@ def _safe_file_url(file_field):
         return ''
 
 
+def _safe_avatar_url(user_id):
+    try:
+        return UserProfile.objects.filter(user_id=user_id).values_list('avatar_url', flat=True).first() or ''
+    except Exception:
+        return ''
+
+
 def _get_draw_winner_detail(draw):
     winner_number = RaffleNumber.objects.filter(
         raffle_list__raffle_id=draw.raffle_id,
         number=draw.winner_number,
         is_sold=True,
         purchase__isnull=False,
-    ).select_related('purchase__user', 'purchase__user__profile').first()
+    ).select_related('purchase__user').first()
 
     if not winner_number or not winner_number.purchase_id:
         return {
@@ -53,7 +60,7 @@ def _get_draw_winner_detail(draw):
         'buyer_name': buyer_name,
         'buyer_alias': _mask_buyer_name(buyer),
         'buyer_email': buyer.email or 'No disponible',
-        'buyer_avatar_url': getattr(getattr(buyer, 'profile', None), 'avatar_url', '') or '',
+        'buyer_avatar_url': _safe_avatar_url(buyer.id),
         'buyer_user_id': buyer.id,
         'purchase_reference': winner_number.purchase.reference,
         'purchase_date': winner_number.purchase.created_at,
