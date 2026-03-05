@@ -224,8 +224,20 @@ def raffle_detail(request, raffle_id):
     numbers = RaffleNumber.objects.filter(
         raffle_list__raffle=raffle
     ).values('number').annotate(
-        is_sold=Max('is_sold'),
-        is_reserved=Max('is_reserved'),
+        is_sold=Max(
+            Case(
+                When(is_sold=True, then=Value(1)),
+                default=Value(0),
+                output_field=IntegerField(),
+            )
+        ),
+        is_reserved=Max(
+            Case(
+                When(is_reserved=True, then=Value(1)),
+                default=Value(0),
+                output_field=IntegerField(),
+            )
+        ),
         reserved_until=Max('reserved_until'),
         is_mine=Max(
             Case(
@@ -363,8 +375,20 @@ def raffle_status(request, raffle_id):
     numbers = RaffleNumber.objects.filter(
         raffle_list__raffle=raffle
     ).values('number').annotate(
-        aggregated_is_reserved=Max('is_reserved'),
-        aggregated_is_sold=Max('is_sold'),
+        aggregated_is_reserved=Max(
+            Case(
+                When(is_reserved=True, then=Value(1)),
+                default=Value(0),
+                output_field=IntegerField(),
+            )
+        ),
+        aggregated_is_sold=Max(
+            Case(
+                When(is_sold=True, then=Value(1)),
+                default=Value(0),
+                output_field=IntegerField(),
+            )
+        ),
         aggregated_reserved_until=Max('reserved_until'),
         is_reserved_by_me=reserved_by_me_expression,
         is_mine=Max(
