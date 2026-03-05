@@ -16,6 +16,8 @@ from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from .services import release_expired_reservations
 from accounts.models import UserProfile
+from django.db.utils import ProgrammingError, OperationalError
+from types import SimpleNamespace
 
 
 def _mask_buyer_name(user):
@@ -37,6 +39,23 @@ def _safe_avatar_url(user_id):
         return UserProfile.objects.filter(user_id=user_id).values_list('avatar_url', flat=True).first() or ''
     except Exception:
         return ''
+
+
+def _get_latest_draw_safe(raffle):
+    try:
+        return Draw.objects.filter(raffle=raffle).order_by('-executed_at').first()
+    except (ProgrammingError, OperationalError):
+        fallback_row = (
+            Draw.objects.filter(raffle=raffle)
+            .values('id', 'winner_number', 'executed_at')
+            .order_by('-executed_at')
+            .first()
+        )
+        if not fallback_row:
+            return None
+        fallback_row['winner_comment'] = ''
+        fallback_row['winner_comment_enabled'] = False
+        return SimpleNamespace(**fallback_row)
 
 
 def home(request):
@@ -267,7 +286,7 @@ def raffle_detail(request, raffle_id):
             .order_by('number')
         )
 
-    latest_draw = Draw.objects.filter(raffle=raffle).order_by('-executed_at').first()
+    latest_draw = _get_latest_draw_safe(raffle)
     public_draw_detail = None
     can_comment_as_winner = False
     winner_comment_value = ''
