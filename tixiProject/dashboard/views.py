@@ -9,6 +9,10 @@ from payments.models import Purchase
 from .forms import RaffleForm, RaffleCreateForm, RaffleEditForm, CarouselSlideForm
 from django.db.models import Count, Sum, Q, F, DecimalField, ExpressionWrapper
 from django.utils import timezone
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def _mask_buyer_name(user):
@@ -70,29 +74,36 @@ def _get_draw_winner_detail(draw):
 def _save_raffle_media_from_files(raffle, files):
     media_count = 0
     unsupported_count = 0
+    failed_count = 0
     image_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp']
     video_extensions = ['mp4', 'avi', 'mov', 'mkv', 'webm', 'flv', 'wmv']
 
     for file in files:
-        file_extension = file.name.split('.')[-1].lower()
-        if file_extension in image_extensions:
-            RaffleMedia.objects.create(
-                raffle=raffle,
-                file=file,
-                media_type='image'
-            )
-            media_count += 1
-        elif file_extension in video_extensions:
-            RaffleMedia.objects.create(
-                raffle=raffle,
-                file=file,
-                media_type='video'
-            )
-            media_count += 1
-        else:
-            unsupported_count += 1
+        try:
+            file_name = getattr(file, 'name', '') or ''
+            file_extension = file_name.split('.')[-1].lower() if '.' in file_name else ''
 
-    return media_count, unsupported_count
+            if file_extension in image_extensions:
+                RaffleMedia.objects.create(
+                    raffle=raffle,
+                    file=file,
+                    media_type='image'
+                )
+                media_count += 1
+            elif file_extension in video_extensions:
+                RaffleMedia.objects.create(
+                    raffle=raffle,
+                    file=file,
+                    media_type='video'
+                )
+                media_count += 1
+            else:
+                unsupported_count += 1
+        except Exception:
+            failed_count += 1
+            logger.exception('Error subiendo archivo de media para rifa %s: %s', raffle.id, getattr(file, 'name', '<sin_nombre>'))
+
+    return media_count, unsupported_count, failed_count
 
 
 @staff_member_required
@@ -100,42 +111,52 @@ def create_raffle(request):
     if request.method == 'POST':
         form = RaffleCreateForm(request.POST, request.FILES)
         if form.is_valid():
-            raffle = form.save()
-            list_name = form.cleaned_data['list_name']
-            list_start = form.cleaned_data['list_start']
-            list_end = form.cleaned_data['list_end']
+            try:
+                raffle = form.save()
+                list_name = form.cleaned_data['list_name']
+                list_start = form.cleaned_data['list_start']
+                list_end = form.cleaned_data['list_end']
 
-            raffle_list = RaffleList.objects.create(
-                raffle=raffle,
-                name=list_name,
-                start_number=list_start,
-                end_number=list_end
-            )
-
-            numbers = [
-                RaffleNumber(
-                    raffle_list=raffle_list,
-                    number=n
+                raffle_list = RaffleList.objects.create(
+                    raffle=raffle,
+                    name=list_name,
+                    start_number=list_start,
+                    end_number=list_end
                 )
-                for n in range(list_start, list_end + 1)
-            ]
-            RaffleNumber.objects.bulk_create(numbers)
 
-            files = request.FILES.getlist('media_files')
-            media_count, unsupported_count = _save_raffle_media_from_files(raffle, files)
+                numbers = [
+                    RaffleNumber(
+                        raffle_list=raffle_list,
+                        number=n
+                    )
+                    for n in range(list_start, list_end + 1)
+                ]
+                RaffleNumber.objects.bulk_create(numbers)
 
-            if media_count > 0 and unsupported_count > 0:
-                messages.warning(
-                    request,
-                    f'Rifa creada. Se subieron {media_count} archivo(s). {unsupported_count} no fueron soportados.'
-                )
-            elif media_count > 0:
-                messages.success(request, f'Rifa creada con {media_count} archivo(s).')
-            elif unsupported_count > 0:
-                messages.warning(request, 'Rifa creada pero los archivos no son soportados.')
-            else:
-                messages.success(request, 'Rifa creada correctamente.')
-            return redirect('dashboard:raffle_detail', raffle.id)
+                files = request.FILES.getlist('media_files')
+                media_count, unsupported_count, failed_count = _save_raffle_media_from_files(raffle, files)
+
+                if failed_count > 0:
+                    messages.warning(
+                        request,
+                        f'Rifa creada, pero {failed_count} archivo(s) no se pudieron subir. Revisa configuración de almacenamiento.'
+                    )
+                elif media_count > 0 and unsupported_count > 0:
+                    messages.warning(
+                        request,
+                        f'Rifa creada. Se subieron {media_count} archivo(s). {unsupported_count} no fueron soportados.'
+                    )
+                elif media_count > 0:
+                    messages.success(request, f'Rifa creada con {media_count} archivo(s).')
+                elif unsupported_count > 0:
+                    messages.warning(request, 'Rifa creada pero los archivos no son soportados.')
+                else:
+                    messages.success(request, 'Rifa creada correctamente.')
+
+                return redirect('dashboard:raffle_detail', raffle.id)
+            except Exception:
+                logger.exception('Error inesperado creando rifa con media')
+                messages.error(request, 'No se pudo crear la rifa con los archivos adjuntos. Verifica el almacenamiento e inténtalo de nuevo.')
         messages.error(request, 'Corrige los errores del formulario.')
     else:
         form = RaffleCreateForm()
@@ -318,9 +339,14 @@ def edit_raffle(request, raffle_id):
         if form.is_valid():
             form.save()
             files = request.FILES.getlist('media_files')
-            media_count, unsupported_count = _save_raffle_media_from_files(raffle, files)
+            media_count, unsupported_count, failed_count = _save_raffle_media_from_files(raffle, files)
 
-            if media_count > 0 and unsupported_count > 0:
+            if failed_count > 0:
+                messages.warning(
+                    request,
+                    f'Rifa actualizada, pero {failed_count} archivo(s) no se pudieron subir. Revisa configuración de almacenamiento.'
+                )
+            elif media_count > 0 and unsupported_count > 0:
                 messages.warning(
                     request,
                     f'Rifa actualizada. Se subieron {media_count} archivo(s). {unsupported_count} no fueron soportados.'

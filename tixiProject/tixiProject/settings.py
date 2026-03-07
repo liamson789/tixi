@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import re
 import sys
+from urllib.parse import urlsplit
 import dj_database_url
 from decouple import Csv, config
 from django.core.exceptions import ImproperlyConfigured
@@ -27,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config(
     'SECRET_KEY',
-    default='django-insecure-mh-f8x)k&crdlmb%cfg_w--8$3-lb&%&^^((0wg9lf0y%wzqex'
+    default='(ii1+rdkp$^eqm6pvesz+ak03tc&q-ud#!c6qd^z-y^f%23!*7'
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -220,7 +221,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files (User uploads)
-USE_DO_SPACES = config('USE_DO_SPACES', default=False, cast=bool)
+USE_DO_SPACES = config('USE_DO_SPACES', default=True, cast=bool)
 
 
 def _is_valid_bucket_name(bucket_name):
@@ -231,9 +232,31 @@ def _is_valid_bucket_name(bucket_name):
     return bool(re.match(pattern, bucket_name))
 
 
+def _normalize_spaces_domain(value):
+    value = (value or '').strip()
+    if not value:
+        return ''
+    if '://' in value:
+        parsed = urlsplit(value)
+        value = parsed.netloc or parsed.path
+    return value.strip().strip('/')
+
+
+def _normalize_spaces_endpoint(value, region):
+    value = (value or '').strip()
+    if not value:
+        return f'https://{region}.digitaloceanspaces.com'
+    if '://' not in value:
+        value = f'https://{value}'
+    parsed = urlsplit(value)
+    netloc = parsed.netloc or parsed.path
+    return f'{parsed.scheme}://{netloc}'.rstrip('/')
+
+
 DO_SPACES_BUCKET = config('DO_SPACES_BUCKET', default='').strip()
 DO_SPACES_KEY = config('DO_SPACES_KEY', default='').strip()
 DO_SPACES_SECRET = config('DO_SPACES_SECRET', default='').strip()
+DO_SPACES_DEFAULT_ACL = config('DO_SPACES_DEFAULT_ACL', default='public-read').strip() or None
 
 USE_DO_SPACES = USE_DO_SPACES and _is_valid_bucket_name(DO_SPACES_BUCKET) and bool(DO_SPACES_KEY) and bool(DO_SPACES_SECRET)
 
@@ -242,17 +265,21 @@ if USE_DO_SPACES:
     AWS_SECRET_ACCESS_KEY = DO_SPACES_SECRET
     AWS_STORAGE_BUCKET_NAME = DO_SPACES_BUCKET
     AWS_S3_REGION_NAME = config('DO_SPACES_REGION', default='nyc3')
-    AWS_S3_ENDPOINT_URL = config(
-        'DO_SPACES_ENDPOINT_URL',
-        default=f'https://{AWS_S3_REGION_NAME}.digitaloceanspaces.com'
+    AWS_S3_ENDPOINT_URL = _normalize_spaces_endpoint(
+        config('DO_SPACES_ENDPOINT_URL', default='"https://nyc3.digitaloceanspaces.com"'),
+        AWS_S3_REGION_NAME,
     )
-    AWS_S3_CUSTOM_DOMAIN = config(
-        'DO_SPACES_CDN_DOMAIN',
-        default=f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.digitaloceanspaces.com'
+    AWS_S3_CUSTOM_DOMAIN = _normalize_spaces_domain(
+        config(
+            'DO_SPACES_CDN_DOMAIN',
+            default=f'{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.digitaloceanspaces.com'
+        )
     )
-    AWS_DEFAULT_ACL = None
+    AWS_DEFAULT_ACL = DO_SPACES_DEFAULT_ACL
     AWS_QUERYSTRING_AUTH = False
     AWS_S3_FILE_OVERWRITE = False
+    AWS_S3_SIGNATURE_VERSION = 's3v4'
+    AWS_S3_ADDRESSING_STYLE = 'virtual'
     AWS_LOCATION = config('DO_SPACES_LOCATION', default='media')
 
     STORAGES = {
@@ -260,12 +287,18 @@ if USE_DO_SPACES:
             'BACKEND': 'storages.backends.s3.S3Storage',
             'OPTIONS': {
                 'location': AWS_LOCATION,
+                'querystring_auth': AWS_QUERYSTRING_AUTH,
+                'file_overwrite': AWS_S3_FILE_OVERWRITE,
+                'custom_domain': AWS_S3_CUSTOM_DOMAIN,
             },
         },
         'staticfiles': {
             'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
         },
     }
+
+    if AWS_DEFAULT_ACL:
+        STORAGES['default']['OPTIONS']['default_acl'] = AWS_DEFAULT_ACL
 
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     MEDIA_ROOT = BASE_DIR / 'media'
